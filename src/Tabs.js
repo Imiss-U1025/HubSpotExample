@@ -77,7 +77,7 @@ const SendOrSchedule = () => {
 
   <div className=' bg-lightb min-w-[30%]'>
       <h1 className='text-black text-2xl font-bold m-5'>Sending Options</h1>
-      <label className="inline-flex items-center">
+      <label className="inline-flex items-center m-5">
         <input
           type="radio"
           className="form-radio text-blue-500 border-blue-500"
@@ -85,9 +85,9 @@ const SendOrSchedule = () => {
           checked={radioValue === "option1"}
           onChange={()=>radioChange("option1")}
         />
-        <span className="ml-2 ">Send Now</span>
+        <span className="ml-2 font-semibold text-lg">Send Now</span>
       </label>
-      <label className="inline-flex items-center">
+      <label className="inline-flex items-center m-5">
         <input
           type="radio"
           className="form-radio text-blue-500 border-blue-500"
@@ -95,15 +95,20 @@ const SendOrSchedule = () => {
           checked={radioValue==="option2"}
           onChange={()=>radioChange("option2")}
         />
-        <span className="ml-2">Schedule for Later</span>
+        <span className="ml-2 font-semibold text-lg">Schedule for Later</span>
       </label>
 
       <hr className='border-b border-blue-700 my-4 w-full'/>
-      <div className='flex flex-wrap'>
-      <h1>Estimated recipients</h1>
+      <div className='flex flex-wrap m-5'>
+      <h1 className='text-xl font-semibold'>Estimated recipients</h1>
       <HoverInfo text='People who are supposed to get this E-Mail'/>
       </div>
-      <h1>1 out of 1</h1>
+      <span className='m-5'>
+        <span className="text-8xl font-bold">1</span>
+        <span className="text-3xl"> out of </span>
+        <span className="text-5xl">1</span>
+      </span>
+
   </div>
   </div>
   );

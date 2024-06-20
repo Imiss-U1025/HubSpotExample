@@ -7,7 +7,7 @@ const HoverInfo = ({ text }) => {
       <div
         data-tooltip-id="hover-tooltip"
         data-tooltip-content={text}
-        className="w-6 h-6 ml-2 flex items-center justify-center bg-gray-500 text-white rounded-full cursor-pointer"
+        className="w-4 h-4 ml-2 flex items-center justify-center bg-gray-500 text-white text-xs rounded-full cursor-pointer"
       >
         ?
       </div>

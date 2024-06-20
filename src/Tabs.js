@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import flask_image from './assets/flask.png'
 import HoverInfo from './components/HoverInfo';
 
 
@@ -119,7 +120,7 @@ const SendOrSchedule = () => {
   </div>
   );
 }
-  
+
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState('Automation');
@@ -130,8 +131,13 @@ const Tabs = () => {
       <div className="flex justify-between items-center border-b-2 border-darkb">
         <div className='flex flex-wrap items-center'>
           {/* <img/> Conical Flask */}
-          <h3 className='text-blue-500 font-bold ml-5'>Create A/B test</h3>
-          <HoverInfo text='A/B testing compares two webpage versions to see which performs better in driving SEO and user engagement.'/>
+          <img
+          src={flask_image}
+          alt='.'
+          className='w-7 h-7 ml-5'
+          />
+          <h3 className='text-blue-500 font-bold '>Create A/B test</h3>
+          <HoverInfo text=' A/B testing compares two webpage versions to see which performs better in driving SEO and user engagement.'/>
         </div>
         {/* Tabs Layout */}
         <div className="flex justify-center border-gray-200">

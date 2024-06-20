@@ -124,7 +124,7 @@ const Tabs = () => {
       <div className="flex justify-between items-center border-b-2 border-darkb">
         <div className='flex flex-wrap items-center'>
           {/* <img/> Conical Flask */}
-          <h3 className='text-blue-500 font-bold'>Create A/B test</h3>
+          <h3 className='text-blue-500 font-bold ml-5'>Create A/B test</h3>
           <HoverInfo text='A/B testing compares two webpage versions to see which performs better in driving SEO and user engagement.'/>
         </div>
         {/* Tabs Layout */}
@@ -141,7 +141,7 @@ const Tabs = () => {
             </button>
           ))}
         </div>
-        <button className='border border-indigo-300 bg-indigo-100 rounded-sm text-indigo-600'>Send Email</button>
+        <button className='min-w-[8%] mr-5  border-2 border-indigo-300 bg-indigo-100 rounded-sm text-indigo-600'>Send Email</button>
       </div>
       {/* Tabs' page's content */}
       <div className="">

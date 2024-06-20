@@ -134,11 +134,11 @@ const Tabs = () => {
           <HoverInfo text='A/B testing compares two webpage versions to see which performs better in driving SEO and user engagement.'/>
         </div>
         {/* Tabs Layout */}
-        <div className="flex border-b justify-center border-gray-200">
+        <div className="flex justify-center border-gray-200">
           {tabs.map((tab) => (
             <button
               key={tab}
-              className={`py-4 px-8 mb-0 text-darkb font-semibold text-sm h-[100%] ${
+              className={`py-4 px-8 mb-0 text-darkb font-semibold text-md h-[100%] ${
                 activeTab === tab ? 'border-b-4 border-darkb text-darkb' : ''
               }`}
               onClick={() => setActiveTab(tab)}
@@ -147,7 +147,7 @@ const Tabs = () => {
             </button>
           ))}
         </div>
-        <button className='min-w-[8%] mr-5  border-2 border-indigo-300 bg-indigo-100 rounded-sm text-indigo-600'>Send Email</button>
+        <button className='min-w-[8%] h-[100%] mr-5  border-2 border-indigo-300 bg-indigo-100 rounded-sm text-indigo-600 text-sm'>Send Email</button>
       </div>
       {/* Tabs' page's content */}
       <div className="">

@@ -51,9 +51,15 @@ const SendOrSchedule = () => {
   <div className='flex w-screen h-screen justify-between  '>
   <div className=' p-10 ml-20 mt-5'>
     <h1 className='text-black text-2xl font-bold mb-5'>Recipients</h1>
-    <h1 className='font-bold my-5'>Send to* i icon</h1>
-    <DropdownInput/>    
-    <h1 className='font-bold my-5'>Don't Sent to i icon</h1>
+     <div className='flex  items-center '>
+    <h1 className='font-bold my-5'>Send to</h1>
+    <HoverInfo text='Enter the Email-Address of people you want to send this'/>
+    </div>
+    <DropdownInput/>
+   <div className='flex items-center'>
+    <h1 className='font-bold my-5'>Don't Send to</h1>
+    <HoverInfo className='border-2 border-red-700' text='Enter the Email-Address of people you do not want to send this'/>
+    </div>
     <DropdownInput/>
 
     <label class="flex items-center my-5">

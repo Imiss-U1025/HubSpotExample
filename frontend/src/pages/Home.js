@@ -1,12 +1,14 @@
-import React from 'react';
-import Authorization from '../components/Authorization';
+import Header from "../components/Header";
+import MenuBar from "../components/MenuBar";
 
-const Home = () => {
+
+const MailSetting = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <Authorization />
-    </div>
+    <>
+      <Header />
+      <MenuBar />
+    </>
   );
 };
 
-export default Home;
+export default MailSetting;

@@ -12,6 +12,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/athorization" />}  />
+        <Route path="/home" element={<Home/>}  />
         <Route path="/athorization" element={<Authorization/>} />
         <Route path="/success" element={<Success/>} />
         <Route path="/mail-setting" element={<MailSetting/>} />

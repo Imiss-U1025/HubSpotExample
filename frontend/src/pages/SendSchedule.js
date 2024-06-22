@@ -45,7 +45,7 @@ const SendSchedule = () => {
         className="form-checkbox h-4 w-4 text-blue-500 border-blue-500 rounded focus:ring-blue-500 focus:border-blue-500"
         onClick={handleCheckboxNonOpeners}
         />
-        <span className="ml-2 text-gray-700">Don't send to non openers </span>
+        <span className="ml-2 text-gray-700">Send to non openers </span>
       </label>   
       { nonOpeners && <div>
         <span className='text-lg font-semibold'>Subject Line</span> <span className='text-sm'>(Recommended to choose a new Subject Line)*</span>

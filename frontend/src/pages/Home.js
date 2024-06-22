@@ -1,14 +1,14 @@
 import Header from "../components/Header";
-import MenuBar from "../components/MenuBar";
+import SendSchedulePage from "./SendSchedulePage";
 
 
-const MailSetting = () => {
+const Home = () => {
   return (
     <>
       <Header />
-      <MenuBar />
+      <SendSchedulePage />
     </>
   );
 };
 
-export default MailSetting;
+export default Home;

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { PiFlask } from "react-icons/pi";
-import SendSchedule from "../pages/SendSchedule";
-import HoverInfo from "./HoverInfo";
+import SendSchedule from "./SendSchedule";
+import HoverInfo from "../components/HoverInfo";
 
-const MenuBar = () => {
+const SendSchedulePage = () => {
   const [activeTab, setActiveTab] = useState("Send or Schedule");
   const tabs = ["Automation", "Send or Schedule", "Edit", "Settings"];
 
@@ -38,13 +38,13 @@ const MenuBar = () => {
         </div>
       </div>
       <div className="">
-        {activeTab === "Automation" && <div>Content for Automation</div>}
-        {activeTab === "Send or Schedule" && <SendSchedule />}
-        {activeTab === "Edit" && <div>Content for Edit</div>}
-        {activeTab === "Settings" && <div>Content for Settings</div>}
+        {/* {activeTab === "Automation" && <div>Content for Automation</div>} */}
+        <SendSchedule/>
+        {/* {activeTab === "Edit" && <div>Content for Edit</div>}
+        {activeTab === "Settings" && <div>Content for Settings</div>} */}
       </div>
     </div>
   );
 };
 
-export default MenuBar;
+export default SendSchedulePage;

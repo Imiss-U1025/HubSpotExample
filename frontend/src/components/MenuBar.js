@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { PiFlask } from "react-icons/pi";
+import {NavLink } from "react-router-dom";
 import HoverInfo from "../components/HoverInfo";
-import { Link, useNavigate, NavLink } from "react-router-dom";
-import SendSchedulePage from "../pages/SendSchedulePage";
 
 const MenuBar = () => {
-  const [activeTab, setActiveTab] = useState("Send or Schedule");
-  const tabs = ["Edit", "Settings", "Send or Schedule", "Automation"];
-  const navigate = useNavigate();
-  const EditClick = () => {
-    navigate("/edit");
-  };
 
   return (
     <div className="flex justify-between items-center px-10 py-3 border-b-2 border-gray-200">

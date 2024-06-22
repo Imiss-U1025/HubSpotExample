@@ -15,12 +15,6 @@ const Root = styled("div")(
 `
 );
 
-const Label = styled("label")`
-  padding: 0 0 4px;
-  line-height: 1.5;
-  display: block;
-`;
-
 const InputWrapper = styled("div")(
   ({ theme }) => `
   width: 700px;
@@ -161,7 +155,6 @@ const Listbox = styled("ul")(
 export default function CustomizedHook() {
   const {
     getRootProps,
-    getInputLabelProps,
     getInputProps,
     getTagProps,
     getListboxProps,

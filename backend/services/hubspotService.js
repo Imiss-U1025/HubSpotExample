@@ -1,5 +1,5 @@
 const axios = require('axios');
-const User = require('../models/user');
+const User = require('../models/User');
 const { getValidAccessToken } = require('../utils/tokenUtils');
 
 exports.sendEmailToNonOpeners = async (emailCampaignId, newSubject) => {

@@ -4,6 +4,7 @@ import CustomizedHook from "../components/SendList";
 
 const SendSchedule = () => {
   const [radioValue, setRadioValue] = useState("option1");
+  const [title, Settitle] = useState("");
   const [nonOpeners, setNonOpeners] = useState(false);
   const handleCheckboxNonOpeners = (event) => {
     setNonOpeners(event.target.checked);
@@ -12,7 +13,9 @@ const SendSchedule = () => {
   const radioChange = (value) => {
     setRadioValue(value);
   };
-
+  const handleSetTitle = (e) => {
+    Settitle(e.target.value);
+  };
   return (
     <div className="flex w-screen h-screen justify-between  ">
       <div className=" p-10 ml-20 mt-5">
@@ -63,6 +66,8 @@ const SendSchedule = () => {
             <div className="flex flex-wrap my-2">
               <input
                 type="text"
+                value={title}
+                onChange={handleSetTitle}
                 className="border border-gray-400 border-opacity-40 w-[400px] h-[35px] rounded-sm text-sm font-semibold focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
               <button className="border border-gray-400 border-opacity-40  h-[35px] w-[35px] mx-3 rounded-sm text-sm font-semibold">

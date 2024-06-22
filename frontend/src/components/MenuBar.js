@@ -4,7 +4,7 @@ import HoverInfo from "../components/HoverInfo";
 
 const MenuBar = () => {
   const [activeTab, setActiveTab] = useState("Send or Schedule");
-  const tabs = ["Automation", "Send or Schedule", "Edit", "Settings"];
+  const tabs = ["Edit",  "Settings", "Send or Schedule", "Automation"];
 
   return (
     <div className="flex justify-between items-center px-10 border-b-2 border-gray-200">

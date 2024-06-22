@@ -7,7 +7,6 @@ const SendSchedulePage = () => {
     <>
       <Header />
       <MenuBar />
-      <SendSchedule />
     </>
   );
 };

@@ -23,7 +23,7 @@ const Label = styled('label')`
 
 const InputWrapper = styled('div')(
   ({ theme }) => `
-  width: 300px;
+  width: 700px;
   border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
   background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
   border-radius: 4px;
@@ -102,18 +102,16 @@ const StyledTag = styled(Tag)(
   }
 
   & svg {
-    font-size: 12px;
+    font-size: 24px;
     cursor: pointer;
     padding: 4px;
-    width: 1.5rem;
-    height: 1.5rem;
   }
 `,
 );
 
 const Listbox = styled('ul')(
   ({ theme }) => `
-  width: 300px;
+  width: 700px;
   margin: 2px 0 0;
   padding: 0;
   position: absolute;
@@ -181,7 +179,6 @@ export default function CustomizedHook() {
   return (
     <Root>
       <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}>Customized hook</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {value.map((option, index) => {
             const { key, ...tagProps } = getTagProps({ index });
@@ -209,7 +206,7 @@ export default function CustomizedHook() {
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
-  { title: 'All emails', year: 1994 },
+  { title: 'The Shawshank Redemption', year: 1994 },
   { title: 'The Godfather', year: 1972 },
   { title: 'The Godfather: Part II', year: 1974 },
   { title: 'The Dark Knight', year: 2008 },

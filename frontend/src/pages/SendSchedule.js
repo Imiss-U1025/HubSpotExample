@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import HoverInfo from "../components/HoverInfo";
 import CustomizedHook from "../components/SendList";
+import { BsEmojiSmile } from "react-icons/bs";
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import { TiUser } from "react-icons/ti";
+import PersonIcon from '@mui/icons-material/Person';
 
 const SendSchedule = () => {
   const [radioValue, setRadioValue] = useState("option1");
@@ -68,13 +72,13 @@ const SendSchedule = () => {
                 type="text"
                 value={title}
                 onChange={handleSetTitle}
-                className="border border-gray-400 border-opacity-40 w-[400px] h-[35px] rounded-sm text-sm font-semibold focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="px-4 border border-gray-400 border-opacity-40 w-[400px] h-[40px] rounded-sm text-sm font-semibold focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
-              <button className="border border-gray-400 border-opacity-40  h-[35px] w-[35px] mx-3 rounded-sm text-sm font-semibold">
-                :)
+              <button className=" text-[#4F6E91] flex justify-center items-center bg-[#EAF0F5] border border-gray-400 border-opacity-40  h-[40px] px-2 mx-3 rounded-sm text-sm font-semibold">
+                <SentimentSatisfiedAltIcon/>
               </button>
-              <button className="border border-gray-400 border-opacity-40 h-[35px] w-[100px] rounded-sm text-sm font-semibold">
-                Personalize
+              <button className="text-[#4F6E91] flex items-center border bg-[#EAF0F5] px-2 border-gray-400 border-opacity-40 h-[40px] rounded-sm text-sm font-semibold">
+                <PersonIcon/>Personalize
               </button>
             </div>
             <div className="flex flex-wrap ">

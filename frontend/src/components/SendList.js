@@ -21,7 +21,7 @@ const InputWrapper = styled("div")(
   border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 4px;
-  padding: 1px;
+  padding: 3px;
   display: flex;
   flex-wrap: wrap;
 
@@ -73,7 +73,7 @@ const StyledTag = styled(Tag)(
   ({ theme }) => `
   display: flex;
   align-items: center;
-  height: 24px;
+  height: 30px;
   margin: 2px;
   line-height: 22px;
   background-color: ${

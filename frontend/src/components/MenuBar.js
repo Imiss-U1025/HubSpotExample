@@ -5,7 +5,7 @@ import SendSchedule from '../pages/SendSchedule';
 import HoverInfo from './HoverInfo';
 
 const MenuBar = () => {
-    const [activeTab, setActiveTab] = useState('Automation');
+    const [activeTab, setActiveTab] = useState('Send or Schedule');
     const tabs = ['Automation', 'Send or Schedule', 'Edit', 'Settings'];
   
     return (

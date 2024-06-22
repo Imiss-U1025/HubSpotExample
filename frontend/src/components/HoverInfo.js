@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tooltip } from 'react-tooltip';
+import React from "react";
+import { Tooltip } from "react-tooltip";
 
 const HoverInfo = ({ text }) => {
   return (
@@ -11,10 +11,15 @@ const HoverInfo = ({ text }) => {
       >
         ?
       </div>
-      <Tooltip id="hover-tooltip" place="top" type="dark" effect="solid" className="w-48 text-xs" />
+      <Tooltip
+        id="hover-tooltip"
+        place="top"
+        type="dark"
+        effect="solid"
+        className="w-48 text-xs"
+      />
     </div>
   );
 };
 
 export default HoverInfo;
-   

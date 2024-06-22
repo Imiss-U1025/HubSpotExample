@@ -33,9 +33,8 @@ import MenuBar from "./components/MenuBar";
 import Header from "./components/Header";
 import Success from "./pages/Success";
 import Authorization from "./components/Authorization";
-import SendSchedulePage from "./pages/SendSchedulePage";
 import Edit from "./pages/Edit";
-import SendSchedule from "./data/SendSchedule";
+import SendSchedule from "./pages/SendSchedule";
 import "./App.css";
 
 function App() {

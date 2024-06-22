@@ -1,4 +1,4 @@
-import SendSchedule from "../data/SendSchedule";
+import SendSchedule from "./SendSchedule";
 import MenuBar from "../components/MenuBar";
 import Header from "../components/Header";
 

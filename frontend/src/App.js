@@ -4,7 +4,7 @@ import "./App.css";
 import SendSchedule from "./pages/SendSchedule";
 import Home from "./pages/Home";
 import Success from "./pages/Success";
-import MailSetting from "./components/MailSetting";
+import MailSetting from "./pages/MailSetting";
 import Authorization from "./components/Authorization";
 
 const App = () => {

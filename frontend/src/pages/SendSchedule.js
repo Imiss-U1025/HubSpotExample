@@ -17,7 +17,7 @@ const SendSchedule = () => {
     Settitle(e.target.value);
   };
   return (
-    <div className="flex w-screen h-screen justify-between  ">
+    <div className="flex h-screen justify-between  ">
       <div className=" p-10 ml-20 mt-5">
         <h1 className="text-2xl font-bold mb-5">Recipients</h1>
         <div className="flex  items-center ">

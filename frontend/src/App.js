@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./pages/SendSchedulePage";
 import Success from "./pages/Success";
 import Authorization from "./components/Authorization";
 import SendSchedulePage from "./pages/SendSchedulePage";

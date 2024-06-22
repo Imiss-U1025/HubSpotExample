@@ -102,9 +102,11 @@ const StyledTag = styled(Tag)(
   }
 
   & svg {
-    font-size: 24px;
+    font-size: 12px;
     cursor: pointer;
     padding: 4px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `,
 );
@@ -179,6 +181,7 @@ export default function CustomizedHook() {
   return (
     <Root>
       <div {...getRootProps()}>
+        <Label {...getInputLabelProps()}>Customized hook</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {value.map((option, index) => {
             const { key, ...tagProps } = getTagProps({ index });
@@ -206,7 +209,7 @@ export default function CustomizedHook() {
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'All emails', year: 1994 },
   { title: 'The Godfather', year: 1972 },
   { title: 'The Godfather: Part II', year: 1974 },
   { title: 'The Dark Knight', year: 2008 },

@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const EmailForm = () => {
-  const [emailCampaignId, setEmailCampaignId] = useState('');
-  const [newSubject, setNewSubject] = useState('');
+  const [emailCampaignId, setEmailCampaignId] = useState("");
+  const [newSubject, setNewSubject] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/send-to-non-openers', {
-        emailCampaignId,
-        newSubject,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/send-to-non-openers",
+        {
+          emailCampaignId,
+          newSubject,
+        }
+      );
       alert(response.data);
     } catch (error) {
-      console.error('Error sending emails:', error.message);
-      alert('Error sending emails');
+      console.error("Error sending emails:", error.message);
+      alert("Error sending emails");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 shadow-md rounded">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto bg-white p-8 shadow-md rounded"
+    >
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Email Campaign ID:

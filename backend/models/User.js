@@ -11,7 +11,6 @@
 
 // module.exports = mongoose.model('User', UserSchema);
 
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({

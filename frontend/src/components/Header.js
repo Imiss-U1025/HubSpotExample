@@ -19,8 +19,7 @@ const Header = () => {
         <span className="text-semibold text-blue-300">{currentDate}</span>
       </div>
       <div className="flex flex-wrap mr-16">
-        <h1 className="text-xl text-white">New Email</h1>
-        <img src={pencil} alt="" className="w-7 h-7 ml-3" />
+        <h1 className="text-xl text-white">Follow-up Email</h1>
       </div>
       <div className="left-0 flex items-center space-x-4">
         <button className=" bg-[#FF7959] text-white p-2 ml-4 font-bold border-white rounded-sm hover:bg-[#ff8668] min-w-[20%] ">

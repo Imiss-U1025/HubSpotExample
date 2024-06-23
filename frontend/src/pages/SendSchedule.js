@@ -74,10 +74,10 @@ const SendSchedule = () => {
                 onChange={handleSetTitle}
                 className="px-4 border border-gray-400 border-opacity-40 w-[400px] h-[40px] rounded-sm text-sm font-semibold focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
-              <button className=" text-[#4F6E91] flex justify-center items-center bg-[#EAF0F5] border border-gray-400 border-opacity-40  h-[40px] px-2 mx-3 rounded-sm text-sm font-semibold">
+              <button className=" text-[#4F6E91] flex justify-center items-center bg-[#EAF0F5] border border-[#93a8bf66] border-opacity-40  h-[40px] px-2 mx-3 rounded-sm text-sm font-semibold">
                 <SentimentSatisfiedAltIcon/>
               </button>
-              <button className="text-[#4F6E91] flex items-center border bg-[#EAF0F5] px-2 border-gray-400 border-opacity-40 h-[40px] rounded-sm text-sm font-semibold">
+              <button className="text-[#4F6E91] flex items-center border bg-[#EAF0F5] px-2 border-[#93a8bf66] border-opacity-40 h-[40px] rounded-sm text-sm font-semibold">
                 <PersonIcon/>Personalize
               </button>
             </div>

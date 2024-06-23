@@ -21,8 +21,8 @@ const SendSchedule = () => {
     Settitle(e.target.value);
   };
   return (
-    <div className="flex justify-between  ">
-      <div className=" p-10 ml-20 mt-5">
+    <div className="flex justify-between h-screen">
+      <div className=" p-10 pl-20 pr-20 flex-1 basis-auto">
         <h1 className="text-2xl font-bold mb-5">Recipients</h1>
         <div className="flex  items-center ">
           <h1 className="font-bold my-5">Send to</h1>
@@ -94,7 +94,7 @@ const SendSchedule = () => {
         )}
       </div>
 
-      <div className=" bg-[#F5F8FA] min-w-[30%]">
+      <div className=" bg-[#F5F8FA] min-w-[35%]">
         <h1 className=" text-2xl font-bold m-5">Sending Options</h1>
         <label className="inline-flex items-center m-5">
           <input
@@ -109,7 +109,7 @@ const SendSchedule = () => {
         <label className="inline-flex items-center m-5">
           <input
             type="radio"
-            className="form-radio text-blue-500 border-blue-500"
+            className="form-radio text-blue-500 border-[blue-500]"
             value="option2"
             checked={radioValue === "option2"}
             onChange={() => radioChange("option2")}
@@ -117,15 +117,15 @@ const SendSchedule = () => {
           <span className="ml-2 font-semibold text-lg">Schedule for Later</span>
         </label>
 
-        <hr className="border-b border-blue-700 my-4 w-full" />
+        <hr className="border-b border-blue-[#DFE3EB] my-4 w-full" />
         <div className="flex flex-wrap m-5">
           <h1 className="text-xl font-semibold">Estimated recipients</h1>
           <HoverInfo text="People who are supposed to get this E-Mail" />
         </div>
         <span className="m-5">
-          <span className="text-8xl font-bold">1</span>
+          <span className="text-5xl font-bold">1</span>
           <span className="text-3xl"> out of </span>
-          <span className="text-5xl">1</span>
+          <span className="text-4xl">1</span>
         </span>
       </div>
     </div>

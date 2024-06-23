@@ -1,10 +1,9 @@
 import React from "react";
 import { PiFlask } from "react-icons/pi";
-import {NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import HoverInfo from "../components/HoverInfo";
 
 const MenuBar = () => {
-
   return (
     <div className="flex justify-between items-center px-10 py-3 border-b-2 border-gray-200">
       <div className="flex flex-wrap items-center">
@@ -17,36 +16,23 @@ const MenuBar = () => {
           <ul className="flex space-x-4">
             <li>
               <NavLink
-                to="/edit"
-                end
+                to="/connect"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-8 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-8 mb-0 font-semibold text-md h-[100%]"
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
-                Edit
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/success"
-                className={({ isActive }) =>
-                    isActive
-                    ? "py-4 px-8 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-8 mb-0 font-semibold text-md h-[100%]"
-                }
-              >
-                Settings
+                Connect Hubspot
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/send-schedule"
                 className={({ isActive }) =>
-                    isActive
-                    ? "py-4 px-8 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-8 mb-0 font-semibold text-md h-[100%]"
+                  isActive
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
                 Send or Schedule
@@ -54,14 +40,14 @@ const MenuBar = () => {
             </li>
             <li>
               <NavLink
-                to="/automation"
+                to="/mail-list"
                 className={({ isActive }) =>
-                    isActive
-                    ? "py-4 px-8 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-8 mb-0 font-semibold text-md h-[100%]"
+                  isActive
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
-                Automation
+                Email List
               </NavLink>
             </li>
           </ul>

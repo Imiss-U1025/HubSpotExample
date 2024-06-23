@@ -7,9 +7,6 @@ const Header = () => {
   return (
     <div className="relative flex items-center justify-between px-4 py-3 bg-[#253342]">
       <div className="flex items-center space-x-4">
-        <button className="text-white p-2 ml-4 font-bold border-2 border-white rounded-md hover:bg-gray-900 min-w-[20%] ">
-          Exit
-        </button>
         <button className="text-white p-2 border-2 border-white rounded-md hover:bg-gray-900 min-w-[20%]">
           Save
         </button>

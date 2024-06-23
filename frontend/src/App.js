@@ -36,6 +36,7 @@ import Authorization from "./components/Authorization";
 import Edit from "./pages/Edit";
 import SendSchedule from "./pages/SendSchedule";
 import "./App.css";
+import EmailList from "./pages/EmailList";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/athorization" element={<Authorization />} />
         <Route path="/success" element={<Success />} />
         <Route path="/send-schedule" element={<SendSchedule />} />
+        <Route path="/mail-list" element={<EmailList />} />
         <Route path="/edit" element={<Edit />} />
       </Routes>
     </Router>

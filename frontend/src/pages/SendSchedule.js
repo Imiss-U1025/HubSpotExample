@@ -22,7 +22,7 @@ const SendSchedule = () => {
   };
   return (
     <div className="flex justify-between h-screen">
-      <div className=" p-10 pl-20 pr-20 flex-1 basis-auto">
+      <div className=" p-10 pl-28 pr-20 flex-1 basis-auto">
         <h1 className="text-2xl font-bold mb-5">Recipients</h1>
         <div className="flex  items-center ">
           <h1 className="font-bold my-5">Send to</h1>

@@ -1,23 +1,92 @@
-import React, { useState } from "react";
-import HoverInfo from "../components/HoverInfo";
-const EmailList = () => {
-  return (
-    <div className="flex justify-between bg-gray-300">
-      <div className=" bg-white p-10 pl-20 pr-20 flex-1 basis-auto border-r-2 border-solid border-r-gray-100">
-        <h1 className="text-2xl font-bold mb-5">Recipients</h1>
-        <div className="flex  items-center ">
-          <h1 className="font-bold my-5">Send to</h1>
-        </div>
-      </div>
-      <div className=" bg-[#ffffff] min-w-[50%]">
-        <h1 className=" text-2xl font-bold m-5">Sending Options</h1>
-        <div className="flex flex-wrap m-5">
-          <h1 className="text-xl font-semibold">Estimated recipients</h1>
-          <HoverInfo text="People who are supposed to get this E-Mail" />
-        </div>
-      </div>
-    </div>
-  );
+import React from 'react';
+import { Grid, Paper, Container } from '@mui/material';
+
+const useStyles = {
+  paper: {
+    padding: '16px',
+    textAlign: 'center',
+    color: 'black',
+  },
 };
+
+function EmailList() {
+  const classes = useStyles;
+
+  return (
+    <div className=' bg-[#f5f8fa]'>
+    <Container sx={{padding:'4rem'}}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={6}>
+          <Paper style={classes.paper}>
+          <ul>
+            <li>
+              11111111111111111111
+            </li>
+             <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+          </ul>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
+          <Paper style={classes.paper}>
+          <ul>
+            <li>
+              11111111111111111111
+            </li>
+             <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+            <li>
+              11111111111111111111
+            </li>
+          </ul>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
+    </div>
+
+  );
+}
 
 export default EmailList;

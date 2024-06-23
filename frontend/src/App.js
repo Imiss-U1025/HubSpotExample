@@ -31,9 +31,7 @@ import {
 } from "react-router-dom";
 import MenuBar from "./components/MenuBar";
 import Header from "./components/Header";
-import Success from "./pages/Success";
 import Authorization from "./components/Authorization";
-import Edit from "./pages/Edit";
 import SendSchedule from "./pages/SendSchedule";
 import "./App.css";
 import EmailList from "./pages/EmailList";
@@ -45,11 +43,9 @@ function App() {
       <MenuBar />
       <Routes>
         <Route path="/" element={<Navigate to="/athorization" />} />
-        <Route path="/athorization" element={<Authorization />} />
-        <Route path="/success" element={<Success />} />
+        <Route path="/connect" element={<Authorization />} />
         <Route path="/send-schedule" element={<SendSchedule />} />
         <Route path="/mail-list" element={<EmailList />} />
-        <Route path="/edit" element={<Edit />} />
       </Routes>
     </Router>
   );

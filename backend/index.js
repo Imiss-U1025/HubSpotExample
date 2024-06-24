@@ -5,8 +5,8 @@ const connectDB = require("./config/db");
 
 const express = require("express");
 const cors = require("cors");
-const usersRoute = require("./src/routes/api/users");
-const authRoute = require("./src/routes/api/auth");
+const authRoute = require("./routes/authRoutes");
+const emailRoute = require("./routes/emailRoutes");
 
 const PORT = process.env.PORT || 3001;
 
@@ -21,8 +21,8 @@ app.use(
 
 app.use(express.json());
 
-app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/email", emailRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

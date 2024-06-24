@@ -31,10 +31,12 @@ import {
 } from "react-router-dom";
 import MenuBar from "./components/MenuBar";
 import Header from "./components/Header";
-import Authorization from "./components/Authorization";
+import Authorization from "./pages/Authorization";
 import SendSchedule from "./pages/SendSchedule";
-import "./App.css";
 import EmailList from "./pages/EmailList";
+import ConnectHubspot from "./pages/ConnectHubspot";
+import "./App.css";
+
 
 function App() {
   return (
@@ -42,8 +44,9 @@ function App() {
       <Header />
       <MenuBar />
       <Routes>
-        <Route path="/" element={<Navigate to="/athorization" />} />
-        <Route path="/connect" element={<Authorization />} />
+        <Route path="/" element={<Navigate to="/authorize" />} />
+        <Route path="/connect" element={<ConnectHubspot />} />
+        <Route path="/authorize" element={<Authorization />} />
         <Route path="/send-schedule" element={<SendSchedule />} />
         <Route path="/mail-list" element={<EmailList />} />
       </Routes>

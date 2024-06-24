@@ -21,7 +21,7 @@ const SendSchedule = () => {
     Settitle(e.target.value);
   };
   return (
-    <div className="flex justify-between h-screen">
+    <div className="flex justify-between flex-1">
       <div className=" p-10 pl-28 pr-20 flex-1 basis-auto">
         <h1 className="text-2xl font-bold mb-5">Recipients</h1>
         <div className="flex  items-center ">
@@ -35,7 +35,7 @@ const SendSchedule = () => {
           <h1 className="font-bold my-5">Don't Send to</h1>
           <HoverInfo
             className="border-2 border-red-700"
-            text="Enter the Email-Address of people you do not want to send this"
+            text="Enter the Email-Address of people you don't want to send this"
           />
         </div>
         <div className="relative inline-block text-left w-full">

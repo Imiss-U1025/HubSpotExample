@@ -31,12 +31,19 @@ import {
 } from "react-router-dom";
 import MenuBar from "./components/MenuBar";
 import Header from "./components/Header";
+<<<<<<< HEAD
 import Authorization from "./pages/Authorization";
 import SendSchedule from "./pages/SendSchedule";
 import EmailList from "./pages/EmailList";
 import ConnectHubspot from "./pages/ConnectHubspot";
 import "./App.css";
 
+=======
+import Authorization from "./components/Authorization";
+import SendSchedule from "./pages/SendSchedule";
+import "./App.css";
+import EmailList from "./pages/EmailList";
+>>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
 
 function App() {
   return (
@@ -44,9 +51,14 @@ function App() {
       <Header />
       <MenuBar />
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<Navigate to="/authorize" />} />
         <Route path="/connect" element={<ConnectHubspot />} />
         <Route path="/authorize" element={<Authorization />} />
+=======
+        <Route path="/" element={<Navigate to="/athorization" />} />
+        <Route path="/connect" element={<Authorization />} />
+>>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
         <Route path="/send-schedule" element={<SendSchedule />} />
         <Route path="/mail-list" element={<EmailList />} />
       </Routes>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const axios = require("axios");
 const User = require("../models/User");
 const config = require("../config/config");
@@ -15,23 +14,12 @@ exports.authorize = (req, res) => {
     const authorizationUrl = `https://app.hubspot.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}`;
     res.json({"redirect_url":authorizationUrl});
   }
-=======
-const axios = require('axios');
-const User = require('../models/User');
-const config = require('../config/config');
-const { saveTokens } = require('../utils/tokenUtils');
-
-exports.authorize = (req, res) => {
-  const authorizationUrl = `https://app.hubspot.com/oauth/authorize?client_id=${config.hubspot.clientId}&redirect_uri=${config.hubspot.redirectUri}&scope=${config.hubspot.scopes}`;
-  res.redirect(authorizationUrl);
->>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
 };
 
 exports.oauthCallback = async (req, res) => {
   const { code } = req.query;
 
   try {
-<<<<<<< HEAD
     const tokenResponse = await axios.post(
       "https://api.hubapi.com/oauth/v1/token",
       null,
@@ -54,25 +42,5 @@ exports.oauthCallback = async (req, res) => {
   } catch (error) {
     console.error("Error during OAuth callback:", error.message);
     res.status(500).send("Error during OAuth process");
-=======
-    const tokenResponse = await axios.post('https://api.hubapi.com/oauth/v1/token', null, {
-      params: {
-        grant_type: 'authorization_code',
-        client_id: config.hubspot.clientId,
-        client_secret: config.hubspot.clientSecret,
-        redirect_uri: config.hubspot.redirectUri,
-        code,
-      },
-    });
-
-    const { access_token, refresh_token, expires_in } = tokenResponse.data;
-    const hubspotUserId = ''; // Obtain HubSpot user ID through API call if needed
-    await saveTokens(hubspotUserId, access_token, refresh_token, expires_in);
-
-    res.render('success', { message: 'Authorization successful!' });
-  } catch (error) {
-    console.error('Error during OAuth callback:', error.message);
-    res.status(500).send('Error during OAuth process');
->>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
   }
 };

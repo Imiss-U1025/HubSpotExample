@@ -19,8 +19,8 @@ const MenuBar = () => {
                 to="/connect"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
+                    ? "py-[18px] px-4 my-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-[18px] px-4 my-0 font-semibold text-md h-[100%]"
                 }
               >
                 Connect Hubspot
@@ -31,8 +31,8 @@ const MenuBar = () => {
                 to="/send-schedule"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
+                    ? "py-[18px] px-4 my-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-[18px] px-4 my-0 font-semibold text-md h-[100%]"
                 }
               >
                 Send or Schedule
@@ -43,8 +43,8 @@ const MenuBar = () => {
                 to="/mail-list"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
-                    : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
+                    ? "py-[18px] px-4 my-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    : "py-[18px] px-4 my-0 font-semibold text-md h-[100%]"
                 }
               >
                 Email List

@@ -2,6 +2,6 @@ const express = require('express');
 const emailController = require('../controllers/emailController');
 const router = express.Router();
 
-router.post('/send-to-non-openers', emailController.sendToNonOpeners);
+router.post('/get-non-openers', emailController.GetNonOpeners);
 
 module.exports = router;

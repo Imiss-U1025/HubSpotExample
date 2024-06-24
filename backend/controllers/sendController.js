@@ -1,6 +1,6 @@
 const hubspotService = require('../services/hubspotService');
 
-exports.GetNonOpeners = async (req, res) => {
+exports.sendToNonOpeners = async (req, res) => {
   const { emailCampaignId, newSubject } = req.body;
 
   try {

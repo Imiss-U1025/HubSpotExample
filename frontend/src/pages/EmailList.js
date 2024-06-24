@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Paper, Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import { styled, ThemeProvider, createTheme } from "@mui/material/styles";
@@ -18,10 +18,10 @@ import People from "@mui/icons-material/People";
 import PermMedia from "@mui/icons-material/PermMedia";
 import Dns from "@mui/icons-material/Dns";
 import Public from "@mui/icons-material/Public";
-import Checkbox from '@mui/material/Checkbox';
-import CommentIcon from '@mui/icons-material/Comment';
-
-
+import Checkbox from "@mui/material/Checkbox";
+import CommentIcon from "@mui/icons-material/Comment";
+import axios from "axios";
+import Notification from "../components/Notification";
 const data = [
   { icon: <People />, label: "Authentication" },
   { icon: <Dns />, label: "Database" },
@@ -50,8 +50,24 @@ const useStyles = {
     color: "black",
   },
 };
+
+
+
 const CustomizedList = () => {
   const [open, setOpen] = React.useState(true);
+  const [notification, setNotification] = useState('');
+  const apiUrl = process.env.REACT_APP_API_URL;
+  useEffect(() => {
+    axios
+    .get(`${apiUrl}/api/auth/authorize`)
+    .then((response) => {
+      window.location.href = response?.data?.redirect_url;
+    })
+    .catch((error) => {
+      setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+    });
+  }, [open]);
+
   return (
     <Box sx={{ display: "flex" }}>
       <ThemeProvider
@@ -70,7 +86,7 @@ const CustomizedList = () => {
           },
         })}
       >
-        <Paper elevation={0} sx={{ maxWidth: '100%' }}>
+        <Paper elevation={0} sx={{ maxWidth: "100%" }}>
           <FireNav component="nav" disablePadding>
             <Divider />
             <ListItem component="div" disablePadding>
@@ -189,13 +205,19 @@ const CustomizedList = () => {
           </FireNav>
         </Paper>
       </ThemeProvider>
+      <Notification content={notification} />
     </Box>
   );
 };
 
-const RightList=()=> {
+const RightList = () => {
   const [checked, setChecked] = React.useState([0]);
-const maillist=['test1@gmail.com', 'test2@gmail.com', 'test3@gmail.com', 'test4@gmail.com']
+  const maillist = [
+    "test1@gmail.com",
+    "test2@gmail.com",
+    "test3@gmail.com",
+    "test4@gmail.com",
+  ];
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -210,7 +232,7 @@ const maillist=['test1@gmail.com', 'test2@gmail.com', 'test3@gmail.com', 'test4@
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
+    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
       {maillist.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 
@@ -224,14 +246,18 @@ const maillist=['test1@gmail.com', 'test2@gmail.com', 'test3@gmail.com', 'test4@
             }
             disablePadding
           >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+            <ListItemButton
+              role={undefined}
+              onClick={handleToggle(value)}
+              dense
+            >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={value} />
@@ -241,7 +267,7 @@ const maillist=['test1@gmail.com', 'test2@gmail.com', 'test3@gmail.com', 'test4@
       })}
     </List>
   );
-}
+};
 
 function EmailList() {
   const classes = useStyles;
@@ -259,7 +285,7 @@ function EmailList() {
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
               <h1 class="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
-              <RightList/>
+              <RightList />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
                 Review and Send
               </button>

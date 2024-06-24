@@ -15,8 +15,12 @@ const Authorization = () => {
     const queryParams = getQueryParams(location.search);
     const accessToken = queryParams.get("accessToken");
     if (accessToken) {
+      if (!localStorage.getItem("accessToken")) {
+        setNotification("Authentication is successful.");
+      } else if (localStorage.getItem("accessToken") !== accessToken) {
+        setNotification("Authentication is successful.");
+      }
       localStorage.setItem("accessToken", accessToken);
-      setNotification("Authentication is successful.");
     }
   }, [location.search]);
 
@@ -36,11 +40,12 @@ const Authorization = () => {
   return (
     <div className="flex-1 flex items-center justify-center bg-gray-100">
       <div className="flex justify-center h-full items-center px-12">
-        <h1 className="text-6xl font-bold">
+        <h1 className="text-6xl font-bold leading-snug">
           Welcome to Hubspot Follow Up Email Controller
         </h1>
       </div>
       <div className="flex flex-col justify-center h-full bg-[#FF7959] min-w-[30%] items-center border-2 border-white rounded-md">
+        <img src="/images/connect.png" className=" max-w-[200px] mb-7" />
         <h2 className="font-400 text-white text-3xl px-5 mb-6 text-center">
           Click the button below to <br /> connect with Hubspot
         </h2>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import { Grid, Paper, Container } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -243,24 +242,11 @@ const maillist=['test1@gmail.com', 'test2@gmail.com', 'test3@gmail.com', 'test4@
     </List>
   );
 }
-=======
-import React from 'react';
-import { Grid, Paper, Container } from '@mui/material';
-
-const useStyles = {
-  paper: {
-    padding: '16px',
-    textAlign: 'center',
-    color: 'black',
-  },
-};
->>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
 
 function EmailList() {
   const classes = useStyles;
 
   return (
-<<<<<<< HEAD
     <div className="flex-1 bg-[#f5f8fa]">
       <Container sx={{ padding: "4rem" }}>
         <Grid container spacing={3}>
@@ -282,81 +268,6 @@ function EmailList() {
         </Grid>
       </Container>
     </div>
-=======
-    <div className=' bg-[#f5f8fa]'>
-    <Container sx={{padding:'4rem'}}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper style={classes.paper}>
-          <ul>
-            <li>
-              11111111111111111111
-            </li>
-             <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-          </ul>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={6} md={6}>
-          <Paper style={classes.paper}>
-          <ul>
-            <li>
-              11111111111111111111
-            </li>
-             <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-            <li>
-              11111111111111111111
-            </li>
-          </ul>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
-    </div>
-
->>>>>>> fde0971cd445fc2f7e38a516107d57cac64eb301
   );
 }
 

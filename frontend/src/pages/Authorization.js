@@ -1,44 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import Notification from "../components/Notification";
 
 const Authorization = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const [notification, setNotification] = useState("");
+
+  const getQueryParams = (search) => {
+    return new URLSearchParams(search);
+  };
+
+  useEffect(() => {
+    const queryParams = getQueryParams(location.search);
+    const accessToken = queryParams.get("accessToken");
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+      setNotification("Authentication is successful.");
+    }
+  }, [location.search]);
+
   const apiUrl = process.env.REACT_APP_API_URL;
+
   const handleAuthorize = () => {
-    console.log(`${apiUrl}/api/auth/authorize`);
     axios
       .get(`${apiUrl}/api/auth/authorize`)
       .then((response) => {
         window.location.href = response?.data?.redirect_url;
-        if(response?.error?.data){
-           if(response?.error?.status){
-            console.log(response?.error?.status)
-          }
-          if(response?.error?.data){
-            console.log(response?.error?.data)
-          }
-        }
-        else if(response?.error?.config){
-          console.log(response?.error?.config)
-        }
-       
-        console.log(response);
       })
       .catch((error) => {
-        
-        console.log(error?.message);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
   };
 
   return (
     <div className="flex-1 flex items-center justify-center bg-gray-100">
       <div className="flex justify-center h-full items-center px-12">
-        <h1 class="text-6xl font-bold">
+        <h1 className="text-6xl font-bold">
           Welcome to Hubspot Follow Up Email Controller
         </h1>
       </div>
-      <div className="flex justify-center h-full bg-[#FF7959] min-w-[30%] items-center border-2 border-white rounded-md">
+      <div className="flex flex-col justify-center h-full bg-[#FF7959] min-w-[30%] items-center border-2 border-white rounded-md">
+        <h2 className="font-400 text-white text-3xl px-5 mb-6 text-center">
+          Click the button below to <br /> connect with Hubspot
+        </h2>
         <button
           onClick={handleAuthorize}
           className="bg-white text-[#FF7959] p-3 px-12 ml-4 font-bold rounded-md hover:bg-[#d1d1d1]"
@@ -46,6 +51,7 @@ const Authorization = () => {
           Authorize
         </button>
       </div>
+      <Notification content={notification} />
     </div>
   );
 };

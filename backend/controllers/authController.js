@@ -18,27 +18,27 @@ exports.authorize = (req, res) => {
 
 exports.oauthCallback = async (req, res) => {
   const { code } = req.query;
+  const clientId = process.env.HUBSPOT_CLIENT_ID;
+  const clientSecret = process.env.HUBSPOT_CLIENT_SECRET;
+  const redirectUri = process.env.HUBSPOT_REDIRECT_URI;
 
+  const formData = {
+    grant_type: 'authorization_code',
+    client_id: clientId,
+    client_secret: clientSecret,
+    redirect_uri: redirectUri,
+    code: code
+  };
   try {
-    const tokenResponse = await axios.post(
-      "https://api.hubapi.com/oauth/v1/token",
-      null,
-      {
-        params: {
-          grant_type: "authorization_code",
-          client_id: config.hubspot.clientId,
-          client_secret: config.hubspot.clientSecret,
-          redirect_uri: config.hubspot.redirectUri,
-          code,
-        },
+  const response = await axios.post('https://api.hubapi.com/oauth/v1/token', new URLSearchParams(formData), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
-    );
-
-    const { access_token, refresh_token, expires_in } = tokenResponse.data;
-    const hubspotUserId = ""; // Obtain HubSpot user ID through API call if needed
-    await saveTokens(hubspotUserId, access_token, refresh_token, expires_in);
-
-    res.render("success", { message: "Authorization successful!" });
+    });
+    console.log(response);
+    accessToken = response.data.access_token;
+    // res.status(200).json(accessToken);
+    res.redirect(`http://localhost:3000/authorize?accessToken=${accessToken}`);
   } catch (error) {
     console.error("Error during OAuth callback:", error.message);
     res.status(500).send("Error during OAuth process");

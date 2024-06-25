@@ -4,5 +4,7 @@ const router = express.Router();
 
 router.get('/get-contacts', emailController.GetContacts);
 router.get('/get-non-openers', emailController.GetNonOpeners);
+router.get('/get-campaigns', emailController.fetchEmailCampaigns);
+
 
 module.exports = router;

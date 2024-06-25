@@ -66,6 +66,28 @@ const CustomizedList = () => {
       .catch((error) => {
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
+
+      // axios
+      // .get(`${apiUrl}/api/email/get-non-openers`)
+      // .then((response) => {
+      //   console.log(response);
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      //   setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      // });
+      
+      axios
+      .get(`${apiUrl}/api/email/get-campaigns`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+      
+
   }, []);
 
   return (

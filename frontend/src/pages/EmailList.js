@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Paper, Container } from "@mui/material";
 import Box from "@mui/material/Box";
-import { styled, ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  styled,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,12 +26,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CommentIcon from "@mui/icons-material/Comment";
 import axios from "axios";
 import Notification from "../components/Notification";
-const data = [
-  { icon: <People />, label: "Authentication" },
-  { icon: <Dns />, label: "Database" },
-  { icon: <PermMedia />, label: "Storage" },
-  { icon: <Public />, label: "Hosting" },
-];
+
 
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
@@ -57,14 +56,6 @@ const CustomizedList = () => {
   const [contacts, setContacts] = useState([]);
   const apiUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
-    // axios
-    //   .get(`${apiUrl}/api/email/get-non-openers`)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-    //   });
 
     axios
       .get(`${apiUrl}/api/email/get-contacts`)
@@ -104,7 +95,7 @@ const CustomizedList = () => {
                   <Home color="primary" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Project Overview"
+                  primary="All contact list"
                   primaryTypographyProps={{
                     color: "primary",
                     fontWeight: "medium",
@@ -167,7 +158,7 @@ const CustomizedList = () => {
                 }}
               >
                 <ListItemText
-                  primary="Build"
+                  primary="Recipients"
                   primaryTypographyProps={{
                     fontSize: 15,
                     fontWeight: "medium",
@@ -192,17 +183,18 @@ const CustomizedList = () => {
                   }}
                 />
               </ListItemButton>
-              {open &&
-                data.map((item) => (
+                {open &&
+                contacts.map((item) => (
                   <ListItemButton
-                    key={item.label}
+                    key={item.id}
                     sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
                   >
                     <ListItemIcon sx={{ color: "inherit" }}>
-                      {item.icon}
+                      <People />
                     </ListItemIcon>
                     <ListItemText
-                      primary={item.label}
+                      primary={`${item.firstName} ${item.lastName}`}
+                      secondary={`${item.company} - ${item.email}`}
                       primaryTypographyProps={{
                         fontSize: 14,
                         fontWeight: "medium",
@@ -241,35 +233,37 @@ const RightList = () => {
   };
 
   return (
-    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
-      {maillist.map((value, index) => {
-        const labelId = `checkbox-list-label-${value}`;
+    <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
+      {maillist.map((contact, index) => {
+        const labelId = `checkbox-list-label-${index}`;
 
         return (
           <ListItem
             key={index}
-            secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-                <CommentIcon />
-              </IconButton>
-            }
             disablePadding
           >
             <ListItemButton
               role={undefined}
-              onClick={handleToggle(value)}
+              onClick={handleToggle(index)}
               dense
             >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={checked.indexOf(value) !== -1}
+                  checked={checked.indexOf(index) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ "aria-labelledby": labelId }}
+                  inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={value} />
+              <ListItemText
+                id={labelId}
+                primary={`${contact.firstName} ${contact.lastName}`}
+                secondary={`${contact.company} - ${contact.email}`}
+              />
+              <IconButton edge="end" aria-label="comments">
+                <CommentIcon />
+              </IconButton>
             </ListItemButton>
           </ListItem>
         );

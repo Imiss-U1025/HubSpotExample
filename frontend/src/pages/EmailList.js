@@ -46,12 +46,12 @@ const useStyles = {
 };
 
 const apiUrl = process.env.REACT_APP_API_URL;
-const accessToken = localStorage.getItem("accessToken");
 const CustomizedList = () => {
   const [open, setOpen] = React.useState(true);
   const [notification, setNotification] = useState("");
   const [contacts, setContacts] = useState([]);
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
     axios
       .get(`${apiUrl}/api/email/get-contacts?accessToken=${accessToken}`)
       .then((response) => {
@@ -206,23 +206,28 @@ const CustomizedList = () => {
   );
 };
 
-const RightList = () => {
+const RightList = (props) => {
   const [checked, setChecked] = React.useState([0]);
   const [nonopeners, SetNonopeners] = useState([]);
   const [notification, setNotification] = useState("");
 
+  const campaignId = props.campaignId;
+  console.log("1111111111111111", campaignId);
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
     axios
-      .get(`${apiUrl}/api/email/get-non-openers?accessToken=${accessToken}`)
+      .get(
+        `${apiUrl}/api/email/get-non-openers?accessToken=${accessToken}&campaignId=${campaignId}`
+      )
       .then((response) => {
         console.log(response.data);
-        SetNonopeners([]);
+        SetNonopeners(response.data);
       })
       .catch((error) => {
         console.log(error);
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
-  }, []);
+  }, [campaignId]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -239,7 +244,7 @@ const RightList = () => {
 
   return (
     <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
-      {nonopeners.map((contact, index) => {
+      {nonopeners.map((email, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
         return (
@@ -258,11 +263,7 @@ const RightList = () => {
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText
-                id={labelId}
-                primary={`${contact.firstName} ${contact.lastName}`}
-                secondary={`${contact.company} - ${contact.email}`}
-              />
+              <ListItemText id={labelId} primary={`${email}`} />
               <IconButton edge="end" aria-label="comments">
                 <CommentIcon />
               </IconButton>
@@ -275,11 +276,16 @@ const RightList = () => {
   );
 };
 
-const EmailCampaign = () => {
+const EmailCampaign = (props) => {
   const [open, setOpen] = React.useState(true);
   const [notification, setNotification] = useState("");
   const [emailcampaigns, SetEmailcampaigns] = useState([]);
+
+  const SetCampaignId = props.SetCampaignId;
+
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
     axios
       .get(`${apiUrl}/api/email/get-email-campaigns?accessToken=${accessToken}`)
       .then((response) => {
@@ -291,6 +297,12 @@ const EmailCampaign = () => {
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
   }, []);
+
+  const handleClick = (campaignId) => {
+    SetCampaignId(campaignId);
+    localStorage.setItem("campaignId", campaignId);
+    console.log("clicked");
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -412,9 +424,10 @@ const EmailCampaign = () => {
                   <ListItemButton
                     key={item.id}
                     sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
+                    onClick={() => handleClick(item.allEmailCampaignIds)}
                   >
                     <ListItemIcon sx={{ color: "inherit" }}>
-                      <People />
+                      <Dns />
                     </ListItemIcon>
                     <ListItemText
                       primary={`${item.name}`}
@@ -441,6 +454,8 @@ const Campaign = () => {
   const [checked, setChecked] = React.useState([0]);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
     axios
       .get(`${apiUrl}/api/email/get-campaigns?accessToken=${accessToken}`)
       .then((response) => {
@@ -504,6 +519,22 @@ const Campaign = () => {
 
 function EmailList() {
   const classes = useStyles;
+  const [notification, setNotification] = useState("");
+  const [campaignId, SetCampaignId] = useState(
+    localStorage.getItem("campaignId")
+  );
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/auth/reauthorize`)
+      .then((response) => {
+        localStorage.setItem("accessToken", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+  }, [campaignId]);
 
   return (
     <div className="flex-1 bg-[#f5f8fa]">
@@ -511,14 +542,14 @@ function EmailList() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 class="mt-5 text-2xl font-bold mb-5">Recipients</h1>
+              <h1 class="mt-5 text-2xl font-bold mb-5">Contact List</h1>
               <CustomizedList />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
               <h1 class="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
-              <RightList />
+              <RightList campaignId={campaignId} />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
                 Review and Send
               </button>
@@ -529,7 +560,7 @@ function EmailList() {
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
               <h1 class="mt-5 text-2xl font-bold mb-5">Mail Campagin List</h1>
-              <EmailCampaign />
+              <EmailCampaign SetCampaignId={SetCampaignId} />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>

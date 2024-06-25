@@ -3,7 +3,7 @@ const cron = require("node-cron");
 const hubspotService = require("../services/hubspotService");
 
 const HUBSPOT_API_KEY = "your-hubspot-api-key";
-const ORIGINAL_EMAIL_ID = "313077089";
+const ORIGINAL_EMAIL_ID = "313117845";
 const FOLLOWUP_EMAIL_ID = "followup-email-id";
 
 // exports.GetNonOpeners = async (req, res) => {
@@ -68,8 +68,14 @@ exports.GetContacts = async (req, res) => {
 
 exports.GetNonOpeners = async (req, res) => {
   const accessToken = req.query.accessToken;
+  const campaignId = req.query.campaignId;
+  let offset = 0;
+  const limit = 100;
   if (!accessToken) {
     return res.status(400).json({ error: "Access token is required" });
+  }
+  if (!campaignId) {
+    return res.status(400).json({ error: "CampaignID is required" });
   }
   try {
     const response = await axios.get(
@@ -80,31 +86,37 @@ exports.GetNonOpeners = async (req, res) => {
         },
         params: {
           eventType: "OPEN",
-          emailCampaignId: ORIGINAL_EMAIL_ID,
+          emailCampaignId: campaignId,
+          limit: limit,
         },
       }
     );
-    console.log("1111111111111111111111111111111111111111111", response.data);
-    // const openedEmails = response.data.results.map((event) => event.recipient);
 
-    // const contactsResponse = await axios.get(
-    //   `https://api.hubapi.com/crm/v3/objects/contacts`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${accessToken}`,
-    //     },
-    //   }
-    // );
+    console.log("00000000000000000000000000", response.data);
 
-    // const allContacts = contactsResponse.data.results.map(
-    //   (contact) => contact.id
-    // );
+    const openedEmails = response.data.events.map((event) => event.recipient);
+    console.log("1111111111111111111111111111111111111111111", openedEmails);
 
-    // const nonOpeners = allContacts.filter(
-    //   (contact) => !openedEmails.includes(contact)
-    // );
-    // res.json({ nonOpeners });
-    res.json({ });
+    const contactsResponse = await axios.get(
+      `https://api.hubapi.com/crm/v3/objects/contacts`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const allContacts = contactsResponse.data.results.map(
+      (contact) => contact.properties.email
+    );
+    console.log("2222222222222222222222222222222", allContacts);
+    
+    const nonOpeners = allContacts.filter(
+      (email) => !openedEmails.includes(email)
+    );
+    console.log("333333333333333333333333333333333333", nonOpeners);
+
+    res.json(nonOpeners);
   } catch (error) {
     res.status(500).json({ error: "Error fetching non-openers" });
     return [];

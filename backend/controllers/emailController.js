@@ -1,9 +1,11 @@
+const axios = require("axios");
 const hubspotService = require("../services/hubspotService");
+
 const HUBSPOT_API_KEY = 'your-hubspot-api-key';
 const ORIGINAL_EMAIL_ID = 'original-email-id';
 const FOLLOWUP_EMAIL_ID = 'followup-email-id';
 
-const accessToken = '';
+const accessToken = 'CK6J-OiEMhIVAAEAQAAAAQAAAAAAAAAAAACAAAAQGKa7mhYgzsb_Hiiuo9UBMhSIELTBQYoCYLmMX_EZGbnBMSA_BjpAAAAAQQAAAAAAAAAAAAAAAACAAAAAAAAAAAAAIAAAAAAA4AEAAAAAAAAAAAAAABACAAAAAAAAAAAAAQAAAAAAAkIUBpGs9l35XjfIdylvGzA9ITvnz9lKA25hMVIAWgBgAA';
 
 exports.GetNonOpeners = async (req, res) => {
   try {
@@ -35,7 +37,9 @@ exports.GetContacts = async (req, res) => {
     const response = await axios.get('https://api.hubapi.com/contacts/v1/lists/all/contacts/all', {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
+    console.log(response);
     res.json(response.data);
+
   } catch (error) {
     res.send('Error fetching contacts');
   }

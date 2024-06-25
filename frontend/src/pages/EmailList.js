@@ -54,21 +54,23 @@ const useStyles = {
 const CustomizedList = () => {
   const [open, setOpen] = React.useState(true);
   const [notification, setNotification] = useState("");
+  const [contacts, setContacts] = useState([]);
   const apiUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/email/get-non-openers`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-      });
+    // axios
+    //   .get(`${apiUrl}/api/email/get-non-openers`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+    //   });
 
     axios
       .get(`${apiUrl}/api/email/get-contacts`)
       .then((response) => {
-        console.log(response);
+        setContacts(response.data.contacts);
+        console.log(response.data.contacts);
       })
       .catch((error) => {
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);

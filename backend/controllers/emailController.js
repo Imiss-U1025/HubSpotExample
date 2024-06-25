@@ -107,16 +107,17 @@ exports.GetNonOpeners = async (req, res) => {
     );
 
     const allContacts = contactsResponse.data.results.map(
-      (contact) => contact.properties.email
+      (contact) => contact.properties
     );
     console.log("2222222222222222222222222222222", allContacts);
     
-    const nonOpeners = allContacts.filter(
-      (email) => !openedEmails.includes(email)
-    );
-    console.log("333333333333333333333333333333333333", nonOpeners);
+    // const nonOpeners = allContacts.filter(
+    //   (email) => !openedEmails.includes(email)
+    // );
+    // console.log("333333333333333333333333333333333333", nonOpeners);
 
-    res.json(nonOpeners);
+    // res.json(nonOpeners);
+    res.json(allContacts);
   } catch (error) {
     res.status(500).json({ error: "Error fetching non-openers" });
     return [];

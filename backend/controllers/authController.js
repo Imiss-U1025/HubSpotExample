@@ -90,6 +90,7 @@ exports.oauthCallback = async (req, res) => {
   }
 };
 exports.reauthorize = async(req, res) => {
+  console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
   try {
     let tokens = getStoredTokens();
     if (!tokens) {
@@ -103,7 +104,7 @@ exports.reauthorize = async(req, res) => {
       accessToken = await refreshAccessToken(refreshToken);
       console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
     }
-    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
+
     res.json(accessToken);
 
   } catch (error) {

@@ -40,7 +40,7 @@ const SendSchedule = () => {
         <div className="relative inline-block text-left w-full">
           <CustomizedHook />
         </div>
-        <label class="flex items-center my-5">
+        <label className="flex items-center my-5">
           <input
             type="checkbox"
             className="form-checkbox h-4 w-4 text-blue-500 border-blue-500 rounded focus:ring-blue-500 focus:border-blue-500"
@@ -52,7 +52,7 @@ const SendSchedule = () => {
           <HoverInfo text="Contacts you are not actively in touch with" />
         </label>
 
-        <label class="flex items-center my-5">
+        <label className="flex items-center my-5">
           <input
             type="checkbox"
             className="form-checkbox h-4 w-4 text-blue-500 border-blue-500 rounded focus:ring-blue-500 focus:border-blue-500"
@@ -84,7 +84,7 @@ const SendSchedule = () => {
               <span className="text-md  font-semibold mt-4">Resend after </span>
               <input
                 type="number"
-                class="block mx-4 px-2 mt-2 border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                className="block mx-4 px-2 mt-2 border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
 
               <span className="text-md font-semibold mt-4"> hours</span>

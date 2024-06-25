@@ -54,7 +54,6 @@ const CustomizedList = () => {
       .get(`${apiUrl}/api/email/get-contacts?accessToken=${accessToken}`)
       .then((response) => {
         setContacts(response.data.contacts);
-        console.log(response.data.contacts);
       })
       .catch((error) => {
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
@@ -210,7 +209,6 @@ const RightList = (props) => {
   const [notification, setNotification] = useState("");
 
   const campaignId = props.campaignId;
-  console.log("1111111111111111", campaignId);
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -218,7 +216,6 @@ const RightList = (props) => {
         `${apiUrl}/api/email/get-non-openers?accessToken=${accessToken}&campaignId=${campaignId}`
       )
       .then((response) => {
-        console.log(response.data);
         SetNonopeners(response.data);
       })
       .catch((error) => {
@@ -287,7 +284,6 @@ const EmailCampaign = (props) => {
     axios
       .get(`${apiUrl}/api/email/get-email-campaigns?accessToken=${accessToken}`)
       .then((response) => {
-        console.log(response.data);
         SetEmailcampaigns(response.data);
       })
       .catch((error) => {
@@ -299,7 +295,6 @@ const EmailCampaign = (props) => {
   const handleClick = (campaignId) => {
     SetCampaignId(campaignId);
     localStorage.setItem("campaignId", campaignId);
-    console.log("clicked");
   };
 
   return (
@@ -457,7 +452,6 @@ const Campaign = () => {
     axios
       .get(`${apiUrl}/api/email/get-campaigns?accessToken=${accessToken}`)
       .then((response) => {
-        console.log(response.data);
         setCampaign(response.data);
       })
       .catch((error) => {
@@ -540,13 +534,13 @@ function EmailList() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 class="mt-5 text-2xl font-bold mb-5">Contact List</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">Contact List</h1>
               <CustomizedList />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 class="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
               <RightList campaignId={campaignId} />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
                 Review and Send
@@ -557,13 +551,13 @@ function EmailList() {
         <Grid container spacing={3} sx={{ marginTop: "20px" }}>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 class="mt-5 text-2xl font-bold mb-5">Mail Campagin List</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">Mail Campagin List</h1>
               <EmailCampaign SetCampaignId={SetCampaignId} />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 class="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
               <Campaign />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
                 Review and Send

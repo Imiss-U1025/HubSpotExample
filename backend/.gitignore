@@ -6,6 +6,7 @@
 
 # testing
 /coverage
+/controller/token.json
 
 # production
 /build

@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Paper, Container } from "@mui/material";
 import Box from "@mui/material/Box";
-import {
-  styled,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
+import { styled, ThemeProvider, createTheme } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -26,7 +22,6 @@ import Checkbox from "@mui/material/Checkbox";
 import CommentIcon from "@mui/icons-material/Comment";
 import axios from "axios";
 import Notification from "../components/Notification";
-
 
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
@@ -50,15 +45,15 @@ const useStyles = {
   },
 };
 
+const apiUrl = process.env.REACT_APP_API_URL;
+const accessToken = localStorage.getItem("accessToken");
 const CustomizedList = () => {
   const [open, setOpen] = React.useState(true);
   const [notification, setNotification] = useState("");
   const [contacts, setContacts] = useState([]);
-  const apiUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
-
     axios
-      .get(`${apiUrl}/api/email/get-contacts`)
+      .get(`${apiUrl}/api/email/get-contacts?accessToken=${accessToken}`)
       .then((response) => {
         setContacts(response.data.contacts);
         console.log(response.data.contacts);
@@ -66,28 +61,6 @@ const CustomizedList = () => {
       .catch((error) => {
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
-
-      // axios
-      // .get(`${apiUrl}/api/email/get-non-openers`)
-      // .then((response) => {
-      //   console.log(response);
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      //   setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-      // });
-      
-      axios
-      .get(`${apiUrl}/api/email/get-campaigns`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-      });
-      
-
   }, []);
 
   return (
@@ -108,7 +81,7 @@ const CustomizedList = () => {
           },
         })}
       >
-        <Paper elevation={0} sx={{ maxWidth: "100%" }}>
+        <Paper elevation={0} sx={{ maxWidth: "100%", width: "100%" }}>
           <FireNav component="nav" disablePadding>
             <Divider />
             <ListItem component="div" disablePadding>
@@ -187,7 +160,7 @@ const CustomizedList = () => {
                     lineHeight: "20px",
                     mb: "2px",
                   }}
-                  secondary="Authentication, Firestore Database, Realtime Database, Storage, Hosting, Functions, and Machine Learning"
+                  secondary="Name, Company, Email Address"
                   secondaryTypographyProps={{
                     noWrap: true,
                     fontSize: 12,
@@ -205,7 +178,7 @@ const CustomizedList = () => {
                   }}
                 />
               </ListItemButton>
-                {open &&
+              {open &&
                 contacts.map((item) => (
                   <ListItemButton
                     key={item.id}
@@ -235,12 +208,22 @@ const CustomizedList = () => {
 
 const RightList = () => {
   const [checked, setChecked] = React.useState([0]);
-  const maillist = [
-    "test1@gmail.com",
-    "test2@gmail.com",
-    "test3@gmail.com",
-    "test4@gmail.com",
-  ];
+  const [nonopeners, SetNonopeners] = useState([]);
+  const [notification, setNotification] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/email/get-non-openers?accessToken=${accessToken}`)
+      .then((response) => {
+        console.log(response.data);
+        SetNonopeners([]);
+      })
+      .catch((error) => {
+        console.log(error);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+  }, []);
+
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -255,15 +238,12 @@ const RightList = () => {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
-      {maillist.map((contact, index) => {
+    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
+      {nonopeners.map((contact, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
         return (
-          <ListItem
-            key={index}
-            disablePadding
-          >
+          <ListItem key={index} disablePadding>
             <ListItemButton
               role={undefined}
               onClick={handleToggle(index)}
@@ -275,7 +255,7 @@ const RightList = () => {
                   checked={checked.indexOf(index) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
               <ListItemText
@@ -290,6 +270,234 @@ const RightList = () => {
           </ListItem>
         );
       })}
+      <Notification content={notification} />
+    </List>
+  );
+};
+
+const EmailCampaign = () => {
+  const [open, setOpen] = React.useState(true);
+  const [notification, setNotification] = useState("");
+  const [emailcampaigns, SetEmailcampaigns] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/email/get-email-campaigns?accessToken=${accessToken}`)
+      .then((response) => {
+        console.log(response.data);
+        SetEmailcampaigns(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+  }, []);
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <ThemeProvider
+        theme={createTheme({
+          components: {
+            MuiListItemButton: {
+              defaultProps: {
+                disableTouchRipple: true,
+              },
+            },
+          },
+          palette: {
+            mode: "dark",
+            primary: { main: "rgb(102, 157, 246)" },
+            background: { paper: "#273343" },
+          },
+        })}
+      >
+        <Paper elevation={0} sx={{ maxWidth: "100%", width: "100%" }}>
+          <FireNav component="nav" disablePadding>
+            <Divider />
+            <ListItem component="div" disablePadding>
+              <ListItemButton sx={{ height: 56 }}>
+                <ListItemIcon>
+                  <Home color="primary" />
+                </ListItemIcon>
+                <ListItemText
+                  primary="All contact list"
+                  primaryTypographyProps={{
+                    color: "primary",
+                    fontWeight: "medium",
+                    variant: "body2",
+                  }}
+                />
+              </ListItemButton>
+              <Tooltip title="Project Settings">
+                <IconButton
+                  size="large"
+                  sx={{
+                    "& svg": {
+                      color: "rgba(255,255,255,0.8)",
+                      transition: "0.2s",
+                      transform: "translateX(0) rotate(0)",
+                    },
+                    "&:hover, &:focus": {
+                      bgcolor: "unset",
+                      "& svg:first-of-type": {
+                        transform: "translateX(-4px) rotate(-20deg)",
+                      },
+                      "& svg:last-of-type": {
+                        right: 0,
+                        opacity: 1,
+                      },
+                    },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      height: "80%",
+                      display: "block",
+                      left: 0,
+                      width: "1px",
+                      bgcolor: "divider",
+                    },
+                  }}
+                >
+                  <Settings />
+                  <ArrowRight
+                    sx={{ position: "absolute", right: 4, opacity: 0 }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </ListItem>
+            <Divider />
+            <Box
+              sx={{
+                bgcolor: open ? "rgba(71, 98, 130, 0.2)" : null,
+                pb: open ? 2 : 0,
+              }}
+            >
+              <ListItemButton
+                alignItems="flex-start"
+                onClick={() => setOpen(!open)}
+                sx={{
+                  px: 3,
+                  pt: 2.5,
+                  pb: open ? 0 : 2.5,
+                  "&:hover, &:focus": { "& svg": { opacity: open ? 1 : 0 } },
+                }}
+              >
+                <ListItemText
+                  primary="Email Campaign List"
+                  primaryTypographyProps={{
+                    fontSize: 15,
+                    fontWeight: "medium",
+                    lineHeight: "20px",
+                    mb: "2px",
+                  }}
+                  secondary="Name, EmailCampaign Id, Campaign Id"
+                  secondaryTypographyProps={{
+                    noWrap: true,
+                    fontSize: 12,
+                    lineHeight: "16px",
+                    color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                  }}
+                  sx={{ my: 0 }}
+                />
+                <KeyboardArrowDown
+                  sx={{
+                    mr: -1,
+                    opacity: 0,
+                    transform: open ? "rotate(-180deg)" : "rotate(0)",
+                    transition: "0.2s",
+                  }}
+                />
+              </ListItemButton>
+              {open &&
+                emailcampaigns.map((item) => (
+                  <ListItemButton
+                    key={item.id}
+                    sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
+                  >
+                    <ListItemIcon sx={{ color: "inherit" }}>
+                      <People />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={`${item.name}`}
+                      secondary={`${item.allEmailCampaignIds} - ${item.id}`}
+                      primaryTypographyProps={{
+                        fontSize: 14,
+                        fontWeight: "medium",
+                      }}
+                    />
+                  </ListItemButton>
+                ))}
+            </Box>
+          </FireNav>
+        </Paper>
+      </ThemeProvider>
+      <Notification content={notification} />
+    </Box>
+  );
+};
+
+const Campaign = () => {
+  const [notification, setNotification] = useState("");
+  const [campaign, setCampaign] = useState([]);
+  const [checked, setChecked] = React.useState([0]);
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/api/email/get-campaigns?accessToken=${accessToken}`)
+      .then((response) => {
+        console.log(response.data);
+        setCampaign(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+  }, []);
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
+  return (
+    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
+      {campaign.map((contact, index) => {
+        const labelId = `checkbox-list-label-${index}`;
+
+        return (
+          <ListItem key={index} disablePadding>
+            <ListItemButton
+              role={undefined}
+              onClick={handleToggle(index)}
+              dense
+            >
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={checked.indexOf(index) !== -1}
+                  tabIndex={-1}
+                  disableRipple
+                  inputProps={{ "aria-labelledby": labelId }}
+                />
+              </ListItemIcon>
+              <ListItemText
+                id={labelId}
+                primary={`${contact.id} ${contact.appId} ${contact.appName}`}
+              />
+              <IconButton edge="end" aria-label="comments">
+                <CommentIcon />
+              </IconButton>
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+      <Notification content={notification} />
     </List>
   );
 };
@@ -311,6 +519,23 @@ function EmailList() {
             <Paper style={classes.paper}>
               <h1 class="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
               <RightList />
+              <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
+                Review and Send
+              </button>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} sx={{ marginTop: "20px" }}>
+          <Grid item xs={12} sm={6} md={6}>
+            <Paper style={classes.paper}>
+              <h1 class="mt-5 text-2xl font-bold mb-5">Mail Campagin List</h1>
+              <EmailCampaign />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <Paper style={classes.paper}>
+              <h1 class="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
+              <Campaign />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
                 Review and Send
               </button>

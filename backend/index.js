@@ -7,7 +7,7 @@ const express = require("express");
 const cors = require("cors");
 const authRoute = require("./routes/authRoutes");
 const emailRoute = require("./routes/emailRoutes");
-const sendRoute = require("./routes/sendRoutes");
+const sendRoute = require("./routes/sendRoues");
 
 const PORT = process.env.PORT || 3001;
 

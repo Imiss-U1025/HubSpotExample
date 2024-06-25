@@ -3,13 +3,8 @@ const cron = require("node-cron");
 const hubspotService = require("../services/hubspotService");
 
 const HUBSPOT_API_KEY = "your-hubspot-api-key";
-const ORIGINAL_EMAIL_ID = "171006581899";
+const ORIGINAL_EMAIL_ID = "313077089";
 const FOLLOWUP_EMAIL_ID = "followup-email-id";
-
-const HUBSPOT_ACCESS_TOKEN = "your-private-app-access-token";
-
-const accessToken =
-  "CPjNmfWEMhIHAgEAQAAAARintZkWIM7G_x4orqPVATIU3dZRI2bhXuUAY3DiRGYakv2ABgg6UAAxAEH_BwAAAACAAABgeMQogAAAIAAAABQAADgAAADAw_8HAQAAAIAnAACAAAAQAgAAAAAAAAAAAAACAAi4AgAAAAAAAAAAAAAAAAAAAABAQhSBgb7JkTgAc5QyjeMcVI9-uWQ33UoDbmExUgBaAGAA";
 
 // exports.GetNonOpeners = async (req, res) => {
 //   try {
@@ -37,6 +32,10 @@ const accessToken =
 // };
 
 exports.GetContacts = async (req, res) => {
+  const accessToken = req.query.accessToken;
+  if (!accessToken) {
+    return res.status(400).json({ error: "Access token is required" });
+  }
   try {
     const response = await axios.get(
       "https://api.hubapi.com/contacts/v1/lists/all/contacts/all",
@@ -68,9 +67,13 @@ exports.GetContacts = async (req, res) => {
 };
 
 exports.GetNonOpeners = async (req, res) => {
+  const accessToken = req.query.accessToken;
+  if (!accessToken) {
+    return res.status(400).json({ error: "Access token is required" });
+  }
   try {
     const response = await axios.get(
-      "https://api.hubapi.com/marketing/v3/email/public/v1/events",
+      "https://api.hubapi.com/email/public/v1/events",
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -81,55 +84,80 @@ exports.GetNonOpeners = async (req, res) => {
         },
       }
     );
-    // console.log(response);
-    const openedEmails = response.data.results.map((event) => event.recipient);
+    console.log("1111111111111111111111111111111111111111111", response.data);
+    // const openedEmails = response.data.results.map((event) => event.recipient);
 
-    const contactsResponse = await axios.get(
-      `https://api.hubapi.com/crm/v3/objects/contacts`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    // const contactsResponse = await axios.get(
+    //   `https://api.hubapi.com/crm/v3/objects/contacts`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //     },
+    //   }
+    // );
 
-    const allContacts = contactsResponse.data.results.map(
-      (contact) => contact.id
-    );
+    // const allContacts = contactsResponse.data.results.map(
+    //   (contact) => contact.id
+    // );
 
-    const nonOpeners = allContacts.filter(
-      (contact) => !openedEmails.includes(contact)
-    );
-    // console.log(nonOpeners);
-    res.json({ nonOpeners });
+    // const nonOpeners = allContacts.filter(
+    //   (contact) => !openedEmails.includes(contact)
+    // );
+    // res.json({ nonOpeners });
+    res.json({ });
   } catch (error) {
-    // console.error('Error fetching non-openers:', error);
     res.status(500).json({ error: "Error fetching non-openers" });
     return [];
   }
 };
 
 exports.fetchEmailCampaigns = async (req, res) => {
+  const accessToken = req.query.accessToken;
+  if (!accessToken) {
+    return res.status(400).json({ error: "Access token is required" });
+  }
   try {
     const response = await axios.get(
-      "https://api.hubapi.com/marketing-emails/v1/emails?limit=5",
+      "https://api.hubapi.com/marketing-emails/v1/emails",
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       }
     );
-    const campaigns = response.data.objects;
-    campaigns.forEach(campaign => {
-      console.log(`Email Campaign ID: ${campaign.id}, Name: ${campaign.name}`);
+    const emailcampaigns = response.data.objects;
+    emailcampaigns.forEach((campaign) => {
+      console.log(
+        `Campaign ID: ${campaign.id}, Email Campaign ID: ${campaign.allEmailCampaignIds}, Name: ${campaign.name}`
+      );
     });
 
-    res.json(campaigns);
+    res.json(emailcampaigns);
   } catch (error) {
     res.status(500).json({ error: "Error fetching emailcampaigns" });
   }
 };
 
+exports.GetCampaigns = async (req, res) => {
+  const accessToken = req.query.accessToken;
+  if (!accessToken) {
+    return res.status(400).json({ error: "Access token is required" });
+  }
+  try {
+    const response = await axios.get(
+      "https://api.hubapi.com/email/public/v1/campaigns/by-id?limit=10",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const campaigns = response.data.campaigns;
+    res.json(campaigns);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching emailcampaigns" });
+  }
+};
 // exports.sendFollowUpEmail = async (contactId) => {
 //   try {
 //     await axios.post(`https://api.hubapi.com/email/public/v1/singleEmail/send`, {

@@ -11,11 +11,13 @@ async function getNonOpeners(emailCampaignId) {
   // Fetch non-openers using HubSpot API
   // This example assumes you fetch campaign statistics and filter non-openers
   const accessToken = await getValidAccessToken();
+  console.log(accessToken);
   const response = await axios.get(`https://api.hubapi.com/email/public/v1/campaigns/${emailCampaignId}/recipients`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   const recipients = response.data.recipients;
   const nonOpeners = recipients.filter(recipient => !recipient.opened);
+  console.log(nonOpeners);
   return nonOpeners;
 }
 
@@ -33,3 +35,22 @@ async function createAndSendEmail(nonOpeners, subject) {
   });
   return emailResponse.data;
 }
+
+
+// const getNonOpeners = async () => {
+//   try {
+//     const response = await axios.get(`https://api.hubapi.com/email/public/v1/events?eventType=OPEN&campaignId=${ORIGINAL_EMAIL_ID}&hapikey=${HUBSPOT_API_KEY}`);
+//     const openedEmails = response.data.map(event => event.recipient);
+    
+//     const contactsResponse = await axios.get(`https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=${HUBSPOT_API_KEY}`);
+//     const allContacts = contactsResponse.data.contacts.map(contact => contact['vid']);
+    
+//     const nonOpeners = allContacts.filter(contact => !openedEmails.includes(contact));
+    
+//     return nonOpeners;
+//   } catch (error) {
+//     console.error('Error fetching non-openers:', error);
+//     return [];
+//   }
+// };
+

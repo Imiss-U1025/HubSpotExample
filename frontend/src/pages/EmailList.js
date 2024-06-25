@@ -51,22 +51,29 @@ const useStyles = {
   },
 };
 
-
-
 const CustomizedList = () => {
   const [open, setOpen] = React.useState(true);
-  const [notification, setNotification] = useState('');
+  const [notification, setNotification] = useState("");
   const apiUrl = process.env.REACT_APP_API_URL;
   useEffect(() => {
     axios
-    .get(`${apiUrl}/api/auth/authorize`)
-    .then((response) => {
-      window.location.href = response?.data?.redirect_url;
-    })
-    .catch((error) => {
-      setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-    });
-  }, [open]);
+      .get(`${apiUrl}/api/email/get-non-openers`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+
+    axios
+      .get(`${apiUrl}/api/email/get-contacts`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>

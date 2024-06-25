@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import HoverInfo from "../components/HoverInfo";
 import CustomizedHook from "../components/SendList";
-import { BsEmojiSmile } from "react-icons/bs";
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import { TiUser } from "react-icons/ti";
 import PersonIcon from '@mui/icons-material/Person';
 
 const SendSchedule = () => {

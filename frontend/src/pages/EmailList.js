@@ -572,6 +572,7 @@ function EmailList() {
           </Grid>
         </Grid>
       </Container>
+      <Notification content={notification} />
     </div>
   );
 }

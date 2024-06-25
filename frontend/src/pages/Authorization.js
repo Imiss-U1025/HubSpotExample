@@ -45,7 +45,7 @@ const Authorization = () => {
         </h1>
       </div>
       <div className="flex flex-col justify-center h-full bg-[#FF7959] min-w-[30%] items-center border-2 border-white rounded-md">
-        <img src="/images/connect.png" className=" max-w-[200px] mb-7" />
+        <img src="/images/connect.png" className=" max-w-[200px] mb-7" alt="Connect" />
         <h2 className="font-400 text-white text-3xl px-5 mb-6 text-center">
           Click the button below to <br /> connect with Hubspot
         </h2>

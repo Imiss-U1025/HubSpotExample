@@ -79,7 +79,6 @@ exports.oauthCallback = async (req, res) => {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
-    console.log(response);
     const { access_token, refresh_token, expires_in } = response.data;
     saveTokens({ accessToken: access_token, refreshToken: refresh_token, expiresAt: Date.now() + expires_in * 1000 });
 
@@ -104,8 +103,7 @@ exports.reauthorize = async(req, res) => {
       accessToken = await refreshAccessToken(refreshToken);
       console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
     }
-
-    console.log('Refresh Token:', refreshToken);
+    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
     res.json(accessToken);
 
   } catch (error) {

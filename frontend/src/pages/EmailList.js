@@ -215,7 +215,7 @@ const CustomizedList = () => {
 };
 
 const RightList = (props) => {
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = useState([]);
   const [nonopeners, SetNonopeners] = useState([]);
   const [notification, setNotification] = useState("");
 
@@ -228,6 +228,8 @@ const RightList = (props) => {
       )
       .then((response) => {
         SetNonopeners(response.data);
+        const allChecked = response.data.map((_, index) => index);
+        setChecked(allChecked);
       })
       .catch((error) => {
         console.log(error);
@@ -463,7 +465,7 @@ const EmailCampaign = (props) => {
 const Campaign = () => {
   const [notification, setNotification] = useState("");
   const [campaign, setCampaign] = useState([]);
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = useState([]);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -573,14 +575,14 @@ function EmailList() {
           <Grid item xs={12} sm={6} md={6} >
             <Paper style={classes.paper} sx={{height:"100%"}}>
               <h1 className="mt-5 text-2xl font-bold mb-5">
-                Mail Campagin List
+                Mail Campaign List
               </h1>
               <EmailCampaign SetCampaignId={SetCampaignId} />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 className="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">Campaign Lists</h1>
               <Campaign />
             </Paper>
           </Grid>

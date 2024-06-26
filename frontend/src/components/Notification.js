@@ -35,8 +35,8 @@ export default function Notification(props) {
               variant="filled"
               sx={{
                 width: "100%",
-                backgroundColor: "#f67854", // Custom background color
-                color: "white", // Custom text color
+                backgroundColor: "#f67854",
+                color: "white",
               }}
             >
               {message}

@@ -6,11 +6,16 @@ import Divider from "@mui/material/Divider";
 import CloseIcon from "@mui/icons-material/Close";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
+import axios from "axios";
+import Notification from "../components/Notification";
+
 
 export default function SettingDrawer() {
   const [open, setOpen] = useState(false);
   const [subjectline, SetSubjectLine] = useState("");
   const [delaytime, SetDelayTime] = useState("");
+  const [notification, setNotification] = useState("");
+
 
   const toggleDrawer = (newOpen) => {
     setOpen(newOpen);
@@ -24,9 +29,20 @@ export default function SettingDrawer() {
   };
 
   const setSchedule = () => {
-    
+    const apiUrl = process.env.REACT_APP_API_URL;
     toggleDrawer(false);
-    console.log("set the schedul button is clicked", open);
+    console.log("set the schedul button is clicked", subjectline, delaytime);
+    axios
+    .get(
+      `${apiUrl}/api/email/send-non-openers?accessToken=${accessToken}&campaignId=${campaignId}`
+    )
+    .then((response) => {
+      console.log();(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+    });
   };
 
 
@@ -127,6 +143,7 @@ export default function SettingDrawer() {
       <Drawer open={open} onClose={() => toggleDrawer(false)} anchor="right">
         {DrawerList}
       </Drawer>
+      <Notification content={notification} />
     </div>
   );
 }

@@ -20,6 +20,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CommentIcon from "@mui/icons-material/Comment";
 import axios from "axios";
 import Notification from "../components/Notification";
+import SettingDrawer from "../components/SettingDrawer";
 
 const FireNav = styled(List)({
   "& .MuiListItemButton-root": {
@@ -42,6 +43,11 @@ const useStyles = {
     color: "black",
   },
 };
+
+
+
+
+
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const CustomizedList = () => {
@@ -274,7 +280,8 @@ const RightList = (props) => {
 const EmailCampaign = (props) => {
   const [open, setOpen] = React.useState(true);
   const [notification, setNotification] = useState("");
-  const [emailcampaigns, SetEmailcampaigns] = useState([]);
+  const [emailcampaigns, SetEmailCampaigns] = useState([]);
+  const [campaignStatus, SetCampaignStatus] = useState([]);
 
   const SetCampaignId = props.SetCampaignId;
 
@@ -284,7 +291,9 @@ const EmailCampaign = (props) => {
     axios
       .get(`${apiUrl}/api/email/get-email-campaigns?accessToken=${accessToken}`)
       .then((response) => {
-        SetEmailcampaigns(response.data);
+        console.log(response.data);
+        SetEmailCampaigns(response.data.emailCampaigns);
+        SetCampaignStatus(response.data.campaignStatus);
       })
       .catch((error) => {
         console.log(error);
@@ -324,7 +333,7 @@ const EmailCampaign = (props) => {
                   <Home color="primary" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="All contact list"
+                  primary="Email Campaign list"
                   primaryTypographyProps={{
                     color: "primary",
                     fontWeight: "medium",
@@ -413,7 +422,7 @@ const EmailCampaign = (props) => {
                 />
               </ListItemButton>
               {open &&
-                emailcampaigns.map((item) => (
+                emailcampaigns.map((item, index) => (
                   <ListItemButton
                     key={item.id}
                     sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
@@ -424,7 +433,13 @@ const EmailCampaign = (props) => {
                     </ListItemIcon>
                     <ListItemText
                       primary={`${item.name}`}
-                      secondary={`${item.allEmailCampaignIds} - ${item.id}`}
+                      secondary={`${item.allEmailCampaignIds} - ${
+                        item.id
+                      } : Opened ${
+                        campaignStatus[index].open
+                          ? campaignStatus[index].open
+                          : "0"
+                      } of ${campaignStatus[index].sent}`}
                       primaryTypographyProps={{
                         fontSize: 14,
                         fontWeight: "medium",
@@ -515,11 +530,15 @@ function EmailList() {
   const [campaignId, SetCampaignId] = useState(
     localStorage.getItem("campaignId")
   );
-
+  const setSchedule = (campaignId) => {
+    console.log(campaignId);
+  };
   useEffect(() => {
+    console.log("sqqweqweqwe");
     axios
       .get(`${apiUrl}/api/auth/reauthorize`)
       .then((response) => {
+        console.log(response.data);
         localStorage.setItem("accessToken", response.data);
       })
       .catch((error) => {
@@ -542,16 +561,16 @@ function EmailList() {
             <Paper style={classes.paper}>
               <h1 className="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
               <RightList campaignId={campaignId} />
-              <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
-                Review and Send
-              </button>
+              <SettingDrawer/>
             </Paper>
           </Grid>
         </Grid>
         <Grid container spacing={3} sx={{ marginTop: "20px" }}>
           <Grid item xs={12} sm={6} md={6}>
             <Paper style={classes.paper}>
-              <h1 className="mt-5 text-2xl font-bold mb-5">Mail Campagin List</h1>
+              <h1 className="mt-5 text-2xl font-bold mb-5">
+                Mail Campagin List
+              </h1>
               <EmailCampaign SetCampaignId={SetCampaignId} />
             </Paper>
           </Grid>
@@ -560,7 +579,7 @@ function EmailList() {
               <h1 className="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
               <Campaign />
               <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
-                Review and Send
+                Schedule
               </button>
             </Paper>
           </Grid>

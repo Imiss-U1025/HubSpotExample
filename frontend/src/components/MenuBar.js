@@ -9,7 +9,7 @@ const MenuBar = () => {
       <div className="flex flex-wrap items-center">
         {/* <PiFlask style={{ color: "#0091AE", fontSize: "1.5em" }} />
         <h3 className="text-[#0091AE] font-bold ">Create A/B test</h3> */}
-        <HoverInfo text="After completing the necessary settings, click the Send button on the Send Or Schedule page" />
+        <HoverInfo text="After completing the necessary settings, click the Send button on the Setting page" />
 
       </div>
       <div className="flex justify-center border-gray-200">
@@ -21,7 +21,7 @@ const MenuBar = () => {
                 to="/authorize"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-[#ff7959] text-darkb"
                     : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
@@ -33,7 +33,7 @@ const MenuBar = () => {
                 to="/mail-list"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-[#ff7959] text-darkb"
                     : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
@@ -45,11 +45,11 @@ const MenuBar = () => {
                 to="/send-schedule"
                 className={({ isActive }) =>
                   isActive
-                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-gray-600 text-darkb"
+                    ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-[#ff7959] text-darkb"
                     : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
-                Send or Schedule
+                Setting
               </NavLink>
             </li>
           </ul>

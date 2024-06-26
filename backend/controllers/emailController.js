@@ -4,7 +4,7 @@ const hubspotService = require("../services/hubspotService");
 
 const HUBSPOT_API_KEY = "your-hubspot-api-key";
 const ORIGINAL_EMAIL_ID = "313117845";
-const FOLLOWUP_EMAIL_ID = "followup-email-id";
+const FOLLOWUP_EMAIL_ID = "312705699";
 
 // exports.GetNonOpeners = async (req, res) => {
 //   try {
@@ -106,18 +106,25 @@ exports.GetNonOpeners = async (req, res) => {
       }
     );
 
+    // const allContacts = contactsResponse.data.results.map(
+    //   (contact) => contact.id
+    // );
     const allContacts = contactsResponse.data.results.map(
-      (contact) => contact.properties
+      (contact) => contact.properties.email
     );
+    // const allContacts = contactsResponse.data.contacts.map(contact => contact);
     console.log("2222222222222222222222222222222", allContacts);
-    
+
     // const nonOpeners = allContacts.filter(
     //   (email) => !openedEmails.includes(email)
     // );
-    // console.log("333333333333333333333333333333333333", nonOpeners);
+    const nonOpeners = allContacts.filter(
+      (email) => !openedEmails.includes(email)
+    );
+    console.log("333333333333333333333333333333333333", nonOpeners);
 
     // res.json(nonOpeners);
-    res.json(allContacts);
+    res.json(nonOpeners);
   } catch (error) {
     res.status(500).json({ error: "Error fetching non-openers" });
     return [];
@@ -138,18 +145,39 @@ exports.fetchEmailCampaigns = async (req, res) => {
         },
       }
     );
-    const emailcampaigns = response.data.objects;
-    emailcampaigns.forEach((campaign) => {
-      console.log(
-        `Campaign ID: ${campaign.id}, Email Campaign ID: ${campaign.allEmailCampaignIds}, Name: ${campaign.name}`
-      );
+
+    const emailCampaigns = response.data.objects;
+    const campaignStatusPromises = emailCampaigns.map(async (campaign) => {
+      try {
+        const campaignData = await axios.get(
+          `https://api.hubapi.com/email/public/v1/campaigns/${campaign.allEmailCampaignIds}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        return campaignData.data.counters;
+      } catch (error) {
+        console.error(`Error fetching campaign data for ID ${campaign.id}:`, error);
+        return null; // or handle the error as needed
+      }
     });
 
-    res.json(emailcampaigns);
+    const campaignStatus = await Promise.all(campaignStatusPromises);
+
+    // Remove any null values from campaignStatus if needed
+    const filteredCampaignStatus = campaignStatus.filter(status => status !== null);
+
+    res.json({ emailCampaigns, campaignStatus: filteredCampaignStatus });
   } catch (error) {
-    res.status(500).json({ error: "Error fetching emailcampaigns" });
+    console.error('Error fetching email campaigns:', error);
+    res.status(500).json({ error: "Error fetching email campaigns" });
   }
 };
+
+
+
 
 exports.GetCampaigns = async (req, res) => {
   const accessToken = req.query.accessToken;
@@ -171,17 +199,21 @@ exports.GetCampaigns = async (req, res) => {
     res.status(500).json({ error: "Error fetching emailcampaigns" });
   }
 };
-// exports.sendFollowUpEmail = async (contactId) => {
-//   try {
-//     await axios.post(`https://api.hubapi.com/email/public/v1/singleEmail/send`, {
-//       emailId: FOLLOWUP_EMAIL_ID,
-//       recipient: contactId,
-//     }, {
-//       headers: {
-//         Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
-//       },
-//     });
-//   } catch (error) {
-//     console.error('Error sending follow-up email:', error);
-//   }
-// };
+exports.sendFollowUpEmail = async (contactId) => {
+  try {
+    await axios.post(
+      `https://api.hubapi.com/email/public/v1/singleEmail/send`,
+      {
+        emailId: FOLLOWUP_EMAIL_ID,
+        recipient: 32244616994,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.error("Error sending follow-up email:", error);
+  }
+};

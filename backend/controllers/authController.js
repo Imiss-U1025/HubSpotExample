@@ -22,14 +22,17 @@ const saveTokens = (tokens) => {
 };
 
 const refreshAccessToken = async (refreshToken) => {
+
+  console.log("ssssssssssssssssssssssssssssssssssssssss", refreshToken);
+  
   const clientId = process.env.HUBSPOT_CLIENT_ID;
-  const redirectUri = process.env.HUBSPOT_REDIRECT_URI;
+  const clientsecret = process.env.HUBSPOT_CLIENT_SECRET;
   try {
     const response = await axios.post('https://api.hubapi.com/oauth/v1/token', null, {
       params: {
         grant_type: 'refresh_token',
         client_id: clientId,
-        client_secret: redirectUri,
+        client_secret: clientsecret,
         refresh_token: refreshToken,
       },
     });
@@ -90,21 +93,19 @@ exports.oauthCallback = async (req, res) => {
   }
 };
 exports.reauthorize = async(req, res) => {
-  console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
   try {
     let tokens = getStoredTokens();
+
     if (!tokens) {
       console.error('No tokens found. Please authenticate first.');
       return;
     }
 
     let { accessToken, refreshToken, expiresAt } = tokens;
-
     if (Date.now() >= expiresAt) {
+      console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", refreshToken, expiresAt );
       accessToken = await refreshAccessToken(refreshToken);
-      console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
     }
-
     res.json(accessToken);
 
   } catch (error) {

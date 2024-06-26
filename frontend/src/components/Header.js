@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 const Header = () => {
   // const currentDate = new Date().toLocaleDateString();
 
@@ -22,8 +22,7 @@ const Header = () => {
       </div>
       <div className="left-0 flex items-center space-x-4">
         <button className=" bg-[#FF7959] text-white py-2 px-3 font-bold border-white rounded-sm hover:bg-[#fc9379] min-w-[20%] ">
-
-          Review and Send
+          Send and Schedule
         </button>
       </div>
     </div>

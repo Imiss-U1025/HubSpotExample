@@ -36,6 +36,7 @@ import SendSchedule from "./pages/SendSchedule";
 import EmailList from "./pages/EmailList";
 import ConnectHubspot from "./pages/ConnectHubspot";
 import "./App.css";
+import Guide from "./pages/Guide";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/authorize" element={<Authorization />} />
         <Route path="/send-schedule" element={<SendSchedule />} />
         <Route path="/mail-list" element={<EmailList />} />
+        <Route path="/guide" element={<Guide />} />
       </Routes>
     </Router>
   );

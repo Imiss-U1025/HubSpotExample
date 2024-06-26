@@ -12,7 +12,6 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ArrowRight from "@mui/icons-material/ArrowRight";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import Home from "@mui/icons-material/Home";
 import Settings from "@mui/icons-material/Settings";
 import People from "@mui/icons-material/People";
 import Dns from "@mui/icons-material/Dns";
@@ -79,8 +78,8 @@ const CustomizedList = () => {
           },
           palette: {
             mode: "dark",
-            primary: { main: "rgb(102, 157, 246)" },
-            background: { paper: "#273343" },
+            primary: { main: "#ffffff" },
+            background: { paper: "#ff7959" },
           },
         })}
       >
@@ -89,15 +88,13 @@ const CustomizedList = () => {
             <Divider />
             <ListItem component="div" disablePadding>
               <ListItemButton sx={{ height: 56 }}>
-                <ListItemIcon>
-                  <Home color="primary" />
-                </ListItemIcon>
                 <ListItemText
                   primary="All contact list"
                   primaryTypographyProps={{
                     color: "primary",
                     fontWeight: "medium",
                     variant: "body2",
+                    fontSize: "20px"
                   }}
                 />
               </ListItemButton>
@@ -141,8 +138,9 @@ const CustomizedList = () => {
             <Divider />
             <Box
               sx={{
-                bgcolor: open ? "rgba(71, 98, 130, 0.2)" : null,
+                bgcolor: open ? "#fffffff2" : null,
                 pb: open ? 2 : 0,
+                maxHeight: "490px", overflowY:"auto" 
               }}
             >
               <ListItemButton
@@ -162,6 +160,7 @@ const CustomizedList = () => {
                     fontWeight: "medium",
                     lineHeight: "20px",
                     mb: "2px",
+                    color: "#33465b"
                   }}
                   secondary="Name, Company, Email Address"
                   secondaryTypographyProps={{
@@ -178,6 +177,7 @@ const CustomizedList = () => {
                     opacity: 0,
                     transform: open ? "rotate(-180deg)" : "rotate(0)",
                     transition: "0.2s",
+                    color: "#e5764a"
                   }}
                 />
               </ListItemButton>
@@ -185,7 +185,7 @@ const CustomizedList = () => {
                 contacts.map((item) => (
                   <ListItemButton
                     key={item.id}
-                    sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
+                    sx={{ py: 0, minHeight: 32, color: "#33465b", "&:hover": { backgroundColor: "#28385514" } }}
                   >
                     <ListItemIcon sx={{ color: "inherit" }}>
                       <People />
@@ -196,6 +196,11 @@ const CustomizedList = () => {
                       primaryTypographyProps={{
                         fontSize: 14,
                         fontWeight: "medium",
+                      }}
+                      secondaryTypographyProps={{
+                        fontSize: 14,
+                        fontWeight: "medium",
+                        color: "#33465b"
                       }}
                     />
                   </ListItemButton>
@@ -244,7 +249,7 @@ const RightList = (props) => {
   };
 
   return (
-    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
+    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper", maxHeight: "416px", overflowY:"auto"  }}>
       {nonopeners.map((email, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
@@ -319,7 +324,7 @@ const EmailCampaign = (props) => {
           },
           palette: {
             mode: "dark",
-            primary: { main: "rgb(102, 157, 246)" },
+            primary: { main: "#ffffff" },
             background: { paper: "#273343" },
           },
         })}
@@ -329,15 +334,13 @@ const EmailCampaign = (props) => {
             <Divider />
             <ListItem component="div" disablePadding>
               <ListItemButton sx={{ height: 56 }}>
-                <ListItemIcon>
-                  <Home color="primary" />
-                </ListItemIcon>
                 <ListItemText
                   primary="Email Campaign list"
                   primaryTypographyProps={{
                     color: "primary",
                     fontWeight: "medium",
                     variant: "body2",
+                    fontSize: "20px"
                   }}
                 />
               </ListItemButton>
@@ -383,6 +386,7 @@ const EmailCampaign = (props) => {
               sx={{
                 bgcolor: open ? "rgba(71, 98, 130, 0.2)" : null,
                 pb: open ? 2 : 0,
+                maxHeight: "360px", overflowY:"auto"
               }}
             >
               <ListItemButton
@@ -488,7 +492,7 @@ const Campaign = () => {
   };
 
   return (
-    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
+    <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper", maxHeight: "416px", overflowY:"auto" }}>
       {campaign.map((contact, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
@@ -578,9 +582,6 @@ function EmailList() {
             <Paper style={classes.paper}>
               <h1 className="mt-5 text-2xl font-bold mb-5">Campagin Lists</h1>
               <Campaign />
-              <button className=" bg-[#425b76] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 ">
-                Schedule
-              </button>
             </Paper>
           </Grid>
         </Grid>

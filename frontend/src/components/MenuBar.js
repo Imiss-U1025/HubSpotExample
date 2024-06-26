@@ -42,14 +42,14 @@ const MenuBar = () => {
             </li>
             <li>
               <NavLink
-                to="/send-schedule"
+                to="/guide"
                 className={({ isActive }) =>
                   isActive
                     ? "py-4 px-4 mb-0 font-semibold text-md h-[100%] border-b-4 border-[#ff7959] text-darkb"
                     : "py-4 px-4 mb-0 font-semibold text-md h-[100%]"
                 }
               >
-                Setting
+                How to use
               </NavLink>
             </li>
           </ul>

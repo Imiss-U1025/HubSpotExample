@@ -34,9 +34,9 @@ export default function SettingDrawer() {
             Schedule details
           </h2>
         </div>
-        <CloseIcon sx={{ fontSize: 30 }} />
+        <CloseIcon sx={{ fontSize: 30 }} onClick={toggleDrawer(false)} />
       </div>
-      <List>
+      <List sx={{ px: 3 }}>
         {/* {["Inbox", "Starred"].map((text, index) => ( */}
         {/* <ListItem disablePadding>
           <ListItemButton>
@@ -55,12 +55,35 @@ export default function SettingDrawer() {
         </ListItem> */}
 
         {/* ))} */}
-
-        <div></div>
-        <div></div>
-        <div>
-          <FormControl sx={{ px: 3, width: "100%" }} variant="outlined">
-            <h2 className=" font-bold text-xl mt-6 mb-3">New Subject Line</h2>
+        <div className="py-2">
+          <div className="text-[16px] font-bold text-[#3a536d]">
+            Current Email name
+          </div>
+          <p>Get to know us better</p>
+        </div>
+        <div className="py-2">
+          <div className="text-[16px] font-bold text-[#3a536d]">Subject</div>
+          <p>Get to know us better</p>
+        </div>
+        <div className="py-2">
+          <div className="text-[16px] font-bold text-[#3a536d]">Recipients</div>
+          <p>Get to know us better</p>
+        </div>
+        <div className="py-2">
+          <div className="text-[16px] font-bold text-[#3a536d]">Open rate</div>
+          <p>o of 5</p>
+        </div>
+        <div className="py-2">
+          <div className="text-[16px] font-bold text-[#3a536d]">
+            Internal HubSpot IDs
+          </div>
+          <p>330302303</p>
+        </div>
+        <div className="py-2">
+          <FormControl sx={{ width: "100%" }} variant="outlined">
+            <h2 className=" font-bold text-xl mt-6 mb-3 text-[#3a536d]">
+              Subject Line
+            </h2>
             <OutlinedInput
               id="outlined-adornment-weight"
               placeholder="Input New subject Line"
@@ -72,16 +95,39 @@ export default function SettingDrawer() {
             />
           </FormControl>
         </div>
+        <div className="flex flex-wrap items-center my-5">
+          <span className="text-md text-[#30445a] font-semibold mt-4">
+            Resend after{" "}
+          </span>
+          <input
+            type="number"
+            className=" min-h-10 min-w-20 w-36 block mx-4 px-2 mt-2 border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          />
+
+          <span className="text-md font-semibold mt-4 text-[#30445a] ">
+            {" "}
+            hours
+          </span>
+        </div>
       </List>
       <Divider />
-      <List onClick={toggleDrawer(false)}></List>
+      <List>
+        <div className=" flex justify-center items-center">
+          <button
+            className=" bg-[#f67854] text-white py-3 px-4 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 mb-4 "
+            onClick={toggleDrawer(false)}
+          >
+            Set the Schedule
+          </button>
+        </div>
+      </List>
     </Box>
   );
 
   return (
     <div>
       <button
-        className=" bg-[#f67854] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 "
+        className=" bg-[#f67854] text-white py-2 px-3 font-bold border-[#425b76] rounded-md hover:bg-[#516f8f] min-w-[20%] mt-5 mb-4 "
         onClick={toggleDrawer(true)}
       >
         Schedule

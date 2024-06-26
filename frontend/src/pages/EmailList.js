@@ -558,7 +558,7 @@ function EmailList() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <Paper style={classes.paper}>
+            <Paper style={classes.paper} sx={{height:"100%", display: "flex", flexDirection:"column", justifyContent:"space-between"}}>
               <h1 className="mt-5 text-2xl font-bold mb-5">Non-Opener Lists</h1>
               <RightList campaignId={campaignId} />
               <SettingDrawer/>
@@ -566,8 +566,8 @@ function EmailList() {
           </Grid>
         </Grid>
         <Grid container spacing={3} sx={{ marginTop: "20px" }}>
-          <Grid item xs={12} sm={6} md={6}>
-            <Paper style={classes.paper}>
+          <Grid item xs={12} sm={6} md={6} >
+            <Paper style={classes.paper} sx={{height:"100%"}}>
               <h1 className="mt-5 text-2xl font-bold mb-5">
                 Mail Campagin List
               </h1>

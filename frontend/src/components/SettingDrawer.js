@@ -9,13 +9,11 @@ import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import Notification from "../components/Notification";
 
-
 export default function SettingDrawer() {
   const [open, setOpen] = useState(false);
   const [subjectline, SetSubjectLine] = useState("");
   const [delaytime, SetDelayTime] = useState("");
   const [notification, setNotification] = useState("");
-
 
   const toggleDrawer = (newOpen) => {
     setOpen(newOpen);
@@ -31,21 +29,24 @@ export default function SettingDrawer() {
   const setSchedule = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     toggleDrawer(false);
-    console.log("set the schedul button is clicked", subjectline, delaytime);
+    
+    const customData = {
+      subjectline: subjectline,
+      delaytime: delaytime,
+    };
     axios
-    .get(
-      `${apiUrl}/api/email/send-non-openers?accessToken=${accessToken}&campaignId=${campaignId}`
-    )
-    .then((response) => {
-      console.log();(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
-    });
+      .post(`${apiUrl}/api/email/send-non-openers`, customData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
+      });
   };
-
-
 
   const DrawerList = (
     <Box sx={{ width: 450 }} role="presentation">

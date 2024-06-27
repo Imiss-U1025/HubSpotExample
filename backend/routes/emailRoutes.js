@@ -6,7 +6,7 @@ router.get('/get-contacts', emailController.GetContacts);
 router.get('/get-email-campaigns', emailController.fetchEmailCampaigns);
 router.get('/get-campaigns', emailController.GetCampaigns);
 router.get('/get-non-openers', emailController.GetNonOpeners);
-router.get('/send-non-openers', emailController.GetNonOpeners);
+router.post('/send-non-openers', emailController.sendFollowUpEmail);
 
 
 

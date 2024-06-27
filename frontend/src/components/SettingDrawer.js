@@ -29,21 +29,20 @@ export default function SettingDrawer() {
   const setSchedule = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     toggleDrawer(false);
-    
+
     const customData = {
       subjectline: subjectline,
       delaytime: delaytime,
     };
+    console.log(customData);
+
     axios
-      .post(`${apiUrl}/api/email/send-non-openers`, customData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(`${apiUrl}/api/email/send-non-openers`, customData)
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
+        console.log(error);
         setNotification(`Error: ${error?.message || "Unknown error occurred"}`);
       });
   };

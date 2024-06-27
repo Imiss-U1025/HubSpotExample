@@ -159,7 +159,10 @@ exports.fetchEmailCampaigns = async (req, res) => {
         );
         return campaignData.data.counters;
       } catch (error) {
-        console.error(`Error fetching campaign data for ID ${campaign.id}:`, error);
+        console.error(
+          `Error fetching campaign data for ID ${campaign.id}:`,
+          error
+        );
         return null; // or handle the error as needed
       }
     });
@@ -167,17 +170,16 @@ exports.fetchEmailCampaigns = async (req, res) => {
     const campaignStatus = await Promise.all(campaignStatusPromises);
 
     // Remove any null values from campaignStatus if needed
-    const filteredCampaignStatus = campaignStatus.filter(status => status !== null);
+    const filteredCampaignStatus = campaignStatus.filter(
+      (status) => status !== null
+    );
 
     res.json({ emailCampaigns, campaignStatus: filteredCampaignStatus });
   } catch (error) {
-    console.error('Error fetching email campaigns:', error);
+    console.error("Error fetching email campaigns:", error);
     res.status(500).json({ error: "Error fetching email campaigns" });
   }
 };
-
-
-
 
 exports.GetCampaigns = async (req, res) => {
   const accessToken = req.query.accessToken;
@@ -199,7 +201,9 @@ exports.GetCampaigns = async (req, res) => {
     res.status(500).json({ error: "Error fetching emailcampaigns" });
   }
 };
-exports.sendFollowUpEmail = async (contactId) => {
+exports.sendFollowUpEmail = async (req, res) => {
+  const { subjectline, delaytime } = req.body;
+  console.log("sendsendsendsendsendsend", subjectline, delaytime);
   try {
     await axios.post(
       `https://api.hubapi.com/email/public/v1/singleEmail/send`,
@@ -216,4 +220,22 @@ exports.sendFollowUpEmail = async (contactId) => {
   } catch (error) {
     console.error("Error sending follow-up email:", error);
   }
+  // -------------------------------------------------------------------
+  // try {
+  //   await axios.post(
+  //     `https://api.hubapi.com/email/public/v1/singleEmail/send`,
+  //     {
+  //       emailId: FOLLOWUP_EMAIL_ID,
+  //       recipient: 32244616994,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${HUBSPOT_ACCESS_TOKEN}`,
+  //       },
+  //     }
+  //   );
+  // } catch (error) {
+  //   console.error("Error sending follow-up email:", error);
+  // }
+  res.json(subjectline);
 };
